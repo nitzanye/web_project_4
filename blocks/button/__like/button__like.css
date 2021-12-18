@@ -6,3 +6,8 @@
   /*padding: 25px 15px 0 31px;*/
   margin: 0;
 }
+
+.button__like:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}

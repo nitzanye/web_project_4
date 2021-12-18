@@ -1,4 +1,5 @@
 .popup__name-input {
+  all: unset;
   font-weight: 400;
   font-size: 14px;
   line-height: 1.2;
@@ -6,6 +7,9 @@
   color: black;
   border-bottom: 1px solid #000000;
   opacity: 0.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 @media screen and (max-width: 320px) {

@@ -1,0 +1,4 @@
+.profile__wrapper-name {
+  display: flex;
+  justify-content: space-between;
+}

@@ -10,10 +10,25 @@
     <div class="page">
       <div class="popup">
         <div class="popup__window">
+          <button class="popup__close-button">
+            <img
+              class="popup__icon-close-button"
+              src="images/__close-icon.svg"
+              alt="Close button"
+            />
+          </button>
           <h2 class="popup__title">Edit profile</h2>
           <form class="popup__form">
-            <input type="text" class="popup__name-input" />
-            <input type="text" class="popup__hobby-input" />
+            <input
+              type="text"
+              class="popup__name-input"
+              placeholder="Jacques Cousteau"
+            />
+            <input
+              type="text"
+              class="popup__job-input"
+              placeholder="Explorer"
+            />
             <button class="popup__submit-button">Save</button>
           </form>
         </div>
@@ -37,15 +52,17 @@
             alt="Jacques Cousteau image"
           />
           <div class="profile__info">
-            <h1 class="profile__name">Jacques Cousteau</h1>
-            <button class="button__info">
-              <img
-                class="button__edit"
-                src="./images/edit-button.svg"
-                alt="Edit your info"
-              />
-            </button>
-            <p class="profile__hobby">Explorer</p>
+            <div class="profile__wrapper-name">
+              <h1 class="profile__name">Jacques Cousteau</h1>
+              <button class="button__info">
+                <img
+                  class="button__edit"
+                  src="./images/edit-button.svg"
+                  alt="Edit your info"
+                />
+              </button>
+            </div>
+            <p class="profile__job">Explorer</p>
           </div>
           <button class="button__add-items">
             <img
