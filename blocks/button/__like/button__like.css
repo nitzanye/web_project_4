@@ -1,0 +1,8 @@
+.button__like {
+  border: none;
+  background-color: white;
+  width: 21px;
+  height: 19px;
+  /*padding: 25px 15px 0 31px;*/
+  margin: 0;
+}

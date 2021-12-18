@@ -1,0 +1,6 @@
+.profile__info {
+  display: flex;
+  justify-content: space-between;
+  /*flex-wrap: wrap;*/
+  position: relative;
+}

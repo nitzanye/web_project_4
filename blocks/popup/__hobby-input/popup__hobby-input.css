@@ -1,0 +1,15 @@
+.popup__hobby-input {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.2;
+  margin: 29.74px 36px 0;
+  color: black;
+  border-bottom: 1px solid #000000;
+  opacity: 0.2;
+}
+
+@media screen and (max-width: 320px) {
+  .popup__hobby-input {
+    margin: 30px 22px 0;
+  }
+}
