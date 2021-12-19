@@ -1,4 +1,4 @@
 .button__edit {
-  padding: 7px;
-  margin: 0;
+  all: unset;
+  margin: 0 auto;
 }

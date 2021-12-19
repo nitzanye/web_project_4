@@ -1,10 +1,10 @@
 .button__like {
+  all: unset;
   border: none;
-  background-color: white;
   width: 21px;
   height: 19px;
-  /*padding: 25px 15px 0 31px;*/
   margin: 0;
+  align-self: end;
 }
 
 .button__like:hover {

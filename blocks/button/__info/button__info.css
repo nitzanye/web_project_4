@@ -1,12 +1,13 @@
 .button__info {
-  background-color: black;
+  all: unset;
   border: 1px white solid;
-  opacity: 100%;
   width: 24px;
   height: 24px;
   padding: 0;
-  margin-left: 18px;
-  align-self: center;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .button__info:hover {
