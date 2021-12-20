@@ -34,6 +34,7 @@
 @import url(../blocks/button/__add-item/button__add-item.css);
 @import url(../blocks/button/__like/button__like.css);
 @import url(../blocks/button/__like/button__like_icon.css);
+@import url(../blocks/button/__like/_black/button__like_black.css);
 
 /* import cards section classes */
 @import url(../blocks/cards/cards.css);

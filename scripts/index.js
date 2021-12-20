@@ -9,9 +9,8 @@ const form = document.querySelector(".popup__form");
 
 function togglePopup() {
   popup.classList.toggle("popup_opened");
-  /*
   nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent; */
+  jobInput.value = profileJob.textContent;
 }
 
 settingsButton.addEventListener("click", togglePopup);
@@ -21,4 +20,5 @@ form.addEventListener("submit", function (event) {
   event.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
+  togglePopup();
 });

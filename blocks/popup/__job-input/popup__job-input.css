@@ -5,15 +5,13 @@
   line-height: 1.2;
   margin: 29.74px 36px 0;
   color: black;
-  border-bottom: 1px solid #000000;
-  opacity: 0.2;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
+  border-bottom: rgba(0, 0, 0, 20%) 1px solid;
+  padding-bottom: 13px;
 }
 
 @media screen and (max-width: 320px) {
   .popup__job-input {
     margin: 30px 22px 0;
+    padding-bottom: 9px;
   }
 }

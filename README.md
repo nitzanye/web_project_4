@@ -1,16 +1,18 @@
 # Project 4: Around The U.S.
 
-### Overview
+**About the project**
 
-- Figma
-- Images
+An interactive website where users can add, remove or like photos.
 
-**Figma**
+**Built with**
 
-- [Link to the project in Figma](https://www.figma.com/file/SurN1jaeEQIhuZEDMhmWWf/Sprint-4-Around-The-U.S.-desktop-mobile?node-id=0%3A1)
+- HTML
+- CSS
+- JavaScript
 
-**Images**
+**_ Techniques applied in this project _**
 
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster.
+- Developing and interface for different devices
+- Working with Figma
 
-my project
+[Check it out - To the project ->](https://nitzanye.github.io/web_project_4)

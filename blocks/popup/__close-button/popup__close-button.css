@@ -1,8 +1,8 @@
 .popup__close-button {
+  all: unset;
   background: none;
   width: 40px;
   height: 40px;
-  transform: rotate(-45deg);
   position: absolute;
   top: -40px;
   right: -40px;
