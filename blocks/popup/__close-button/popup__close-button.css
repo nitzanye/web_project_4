@@ -14,9 +14,17 @@
   opacity: 0.6;
 }
 
+@media screen and (max-width: 550px) {
+  .popup__close-button {
+    right: 0;
+    top: -53px;
+  }
+}
+
 @media screen and (max-width: 320px) {
   .popup__close-button {
     width: 26px;
     height: 26px;
+    margin: 0 19px;
   }
 }

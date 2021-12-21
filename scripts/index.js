@@ -8,9 +8,13 @@ const jobInput = document.querySelector(".popup__job-input");
 const form = document.querySelector(".popup__form");
 
 function togglePopup() {
-  popup.classList.toggle("popup_opened");
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
+  if (popup.classList.contains("popup_opened")) {
+    popup.classList.remove("popup_opened");
+  } else {
+    nameInput.value = profileName.textContent;
+    jobInput.value = profileJob.textContent;
+    popup.classList.add("popup_opened");
+  }
 }
 
 settingsButton.addEventListener("click", togglePopup);
