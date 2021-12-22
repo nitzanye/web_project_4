@@ -19,6 +19,6 @@
 @media screen and (max-width: 765px) {
   .button__add-items {
     width: 282px;
-    margin: 0 auto;
+    margin: 0 19px;
   }
 }
