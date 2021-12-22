@@ -9,6 +9,7 @@
   margin: 0;
   margin-left: auto;
   border-radius: 2px;
+  box-sizing: border-box;
 }
 
 .button__add-items:hover {
