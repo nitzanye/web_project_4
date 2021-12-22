@@ -5,9 +5,9 @@
   height: 19px;
   margin: 0;
   align-self: center;
-  background-image: url(../../../images/__like.svg);
-  background-repeat: no-repeat;
-  padding-left: 7px;
+  padding-left: 26px;
+  background: url(../../../images/__like.svg) no-repeat center;
+  box-sizing: border-box;
 }
 
 .button__like:hover {

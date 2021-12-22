@@ -7,8 +7,8 @@
   right: -8%;
   cursor: pointer;
   padding: 0;
-  background-image: url(../../../images/__close-icon.svg);
-  background-repeat: no-repeat;
+  background: url(../../../images/__close-icon.svg) no-repeat center;
+  box-sizing: border-box;
 }
 
 .popup__close-button:hover {
@@ -21,6 +21,5 @@
     top: -13%;
     width: 26px;
     height: 26px;
-    background-size: contain;
   }
 }
