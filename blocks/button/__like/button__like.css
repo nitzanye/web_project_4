@@ -6,6 +6,8 @@
   margin: 0;
   align-self: center;
   background-image: url(../../../images/__like.svg);
+  background-repeat: no-repeat;
+  padding-left: 7px;
 }
 
 .button__like:hover {
