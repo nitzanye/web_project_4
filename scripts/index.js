@@ -2,9 +2,9 @@ const settingsButton = document.querySelector(".button__info");
 const popup = document.querySelector(".popup");
 const closeButton = document.querySelector(".popup__close-button");
 const profileName = document.querySelector(".profile__name");
-const nameInput = document.querySelector(".popup__name-input");
+const nameInput = document.querySelector(".popup__input_description_name");
 const profileJob = document.querySelector(".profile__job");
-const jobInput = document.querySelector(".popup__job-input");
+const jobInput = document.querySelector(".popup__input_description_job");
 const form = document.querySelector(".popup__form");
 
 function togglePopup() {
