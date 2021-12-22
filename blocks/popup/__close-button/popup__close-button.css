@@ -21,5 +21,6 @@
     top: -13%;
     width: 26px;
     height: 26px;
+    background-size: contain;
   }
 }
