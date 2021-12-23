@@ -4,14 +4,12 @@
 
 /* import popup classes*/
 @import url(../blocks/popup/popup.css);
-@import url(../blocks/popup/__close-button/popup__close-button.css);
 @import url(../blocks/popup/__window/popup__window.css);
 @import url(../blocks/popup/__title/popup__title.css);
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__input/popup__input.css);
 @import url(../blocks/popup/__input/_description/popup__input_description_name.css);
 @import url(../blocks/popup/__input/_description/popup__input_description_job.css);
-@import url(../blocks/popup/__submit-button/popup__submit-button.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/header/header.css);
 @import url(../blocks/logo/logo.css);
@@ -28,12 +26,12 @@
 
 /* import buttons classes*/
 @import url(../blocks/button/button.css);
-@import url(../blocks/button/__info/button__info.css);
-@import url(../blocks/button/__edit/button__edit.css);
-@import url(../blocks/button/__add-items/button__add-items.css);
-@import url(../blocks/button/__add-item/button__add-item.css);
-@import url(../blocks/button/__like/button__like.css);
-@import url(../blocks/button/__like/_black/button__like_black.css);
+@import url(../blocks/button/_type/button_type_edit.css);
+@import url(../blocks/button/_type/button_type_add.css);
+@import url(../blocks/button/_type/button_type_close.css);
+@import url(../blocks/button/_type/button_type_submit.css);
+@import url(../blocks/button/_style/button_style_like.css);
+@import url(../blocks/button/_style/button_style_full.css);
 
 /* import cards section classes */
 @import url(../blocks/cards/cards.css);

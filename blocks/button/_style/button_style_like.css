@@ -1,16 +1,13 @@
-.button__like {
+.button_style_like {
   all: unset;
   border: none;
   width: 21px;
   height: 19px;
-  margin: 0;
   align-self: center;
   padding-left: 26px;
   background: url(../../../images/__like.svg) no-repeat center;
-  box-sizing: border-box;
 }
 
-.button__like:hover {
-  cursor: pointer;
+.button_style_like:hover {
   opacity: 0.5;
 }

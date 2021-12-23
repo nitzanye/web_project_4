@@ -1,6 +1,7 @@
 .cards__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, 282px);
+  grid-template-rows: auto;
   justify-content: center;
   align-items: center;
   gap: 20px 17px;
@@ -13,8 +14,9 @@
 @media screen and (max-width: 320px) {
   .cards__grid {
     grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: repeat(6, 1fr);
     gap: 20px;
     margin: 36px auto 0;
   }
 }
+
+/* grid-template-rows: repeat(6, 1fr); */
