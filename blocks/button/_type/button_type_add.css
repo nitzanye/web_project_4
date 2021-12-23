@@ -1,5 +1,4 @@
 .button_type_add {
-  all: unset;
   display: flex;
   justify-content: center;
   border: 2px white solid;
