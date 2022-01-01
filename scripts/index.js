@@ -7,6 +7,12 @@ const profileJob = document.querySelector(".profile__job");
 const jobInput = document.querySelector(".popup__input_description_job");
 const form = document.querySelector(".popup__form");
 
+/*   adding cards    */
+const cardsSection = document.querySelector(".cards");
+const cardsGrid = document.querySelector(".cards__grid");
+const card = document.querySelector(".cards__card");
+const deleteButton = document.querySelector(".button_type_delete");
+
 function togglePopup() {
   if (popup.classList.contains("popup_opened")) {
     popup.classList.remove("popup_opened");
