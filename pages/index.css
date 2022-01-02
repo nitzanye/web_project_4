@@ -36,7 +36,7 @@
 
 /* import cards section classes */
 @import url(../blocks/cards/cards.css);
-@import url(../blocks/cards/__grid/cards__grid.css);
+@import url(../blocks/cards/__list/cards__list.css);
 @import url(../blocks/cards/__card/cards__card.css);
 @import url(../blocks/cards/__image/cards__image.css);
 @import url(../blocks/cards/__content/cards__content.css);

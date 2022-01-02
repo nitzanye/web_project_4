@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="page">
-      <div class="popup">
+      <div class="popup popup_type_profile">
         <div class="popup__window">
           <button type="button" class="button button_type_close"></button>
           <h2 class="popup__title">Edit profile</h2>
@@ -27,6 +27,36 @@
             />
             <button type="submit" class="button button_type_submit">
               Save
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="popup popup_type_add">
+        <div class="popup__window">
+          <button
+            type="button"
+            class="button button_type_close button_type_close_add"
+          ></button>
+          <h2 class="popup__title">New place</h2>
+          <form
+            name="popup__form__add-card"
+            class="popup__form popup__form__add-card"
+          >
+            <input
+              type="text"
+              class="popup__input popup__input_new_title"
+              name="popup__input_image_title"
+              placeholder="Title"
+            />
+            <input
+              type="link"
+              class="popup__input popup__input_new_url"
+              name="popup__input_image_url"
+              placeholder="Image link"
+            />
+            <button type="submit" class="button button_type_submit">
+              Create
             </button>
           </form>
         </div>
@@ -60,86 +90,23 @@
         </section>
 
         <section class="cards">
-          <ul class="cards__grid">
-            <li class="cards__card">
-              <button type="button" class="button button_type_delete"></button>
-              <img
-                class="cards__image"
-                src="./images/__image-yosemite-valley.png"
-                alt="Yosemite Valley image"
-              />
-              <div class="cards__content">
-                <h2 class="cards__title">Yosemite Valley</h2>
-                <button type="button" class="button button_style_like"></button>
-              </div>
-            </li>
-            <li class="cards__card">
-              <button type="button" class="button button_type_delete"></button>
-              <img
-                class="cards__image"
-                src="./images/__image-of-lake-louise.png"
-                alt="Lake Louise image"
-              />
-              <div class="cards__content">
-                <h2 class="cards__title">Lake Louise</h2>
-                <button type="button" class="button button_style_like"></button>
-              </div>
-            </li>
-            <li class="cards__card">
-              <button type="button" class="button button_type_delete"></button>
-              <img
-                class="cards__image"
-                src="./images/__image-of-bald-mountains.png"
-                alt="Bald Mountains image"
-              />
-              <div class="cards__content">
-                <h2 class="cards__title">Bald Mountains</h2>
-                <button type="button" class="button button_style_like"></button>
-              </div>
-            </li>
-            <li class="cards__card">
-              <button type="button" class="button button_type_delete"></button>
-              <img
-                class="cards__image"
-                src="./images/__image-of-latemar.png"
-                alt="Latemar image"
-              />
-              <div class="cards__content">
-                <h2 class="cards__title">Latemar</h2>
-                <button type="button" class="button button_style_like"></button>
-              </div>
-            </li>
-            <li class="cards__card">
-              <button type="button" class="button button_type_delete"></button>
-              <img
-                class="cards__image"
-                src="./images/__image-of-vanoise-nationa.png"
-                alt="Vanoise Nationa... image"
-              />
-              <div class="cards__content">
-                <h2 class="cards__title">Vanoise National Park</h2>
-                <button type="button" class="button button_style_like"></button>
-              </div>
-            </li>
-            <li class="cards__card">
-              <button type="button" class="button button_type_delete"></button>
-              <img
-                class="cards__image"
-                src="./images/__image-of-lago-di-braies.png"
-                alt="Lago di Braies image"
-              />
-              <div class="cards__content">
-                <h2 class="cards__title">Lago di Braies</h2>
-                <button type="button" class="button button_style_like"></button>
-              </div>
-            </li>
-          </ul>
+          <ul class="cards__list"></ul>
         </section>
       </main>
       <footer class="footer">
         <p class="footer__copyright">&copy; 2021 Around The U.S.</p>
       </footer>
     </div>
+    <template id="cards-template">
+      <li class="cards__card">
+        <button type="button" class="button button_type_delete"></button>
+        <img class="cards__image" src=" " alt=" " />
+        <div class="cards__content">
+          <h2 class="cards__title"></h2>
+          <button type="button" class="button button_style_like"></button>
+        </div>
+      </li>
+    </template>
     <script src="./scripts/index.js"></script>
   </body>
 </html>
