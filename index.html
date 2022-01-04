@@ -10,7 +10,10 @@
     <div class="page">
       <div class="popup popup_type_profile">
         <div class="popup__window">
-          <button type="button" class="button button_type_close"></button>
+          <button
+            type="button"
+            class="button button_type_close button_type_close_profile"
+          ></button>
           <h2 class="popup__title">Edit profile</h2>
           <form name="popup__form" class="popup__form">
             <input
@@ -32,7 +35,7 @@
         </div>
       </div>
 
-      <div class="popup popup_type_add">
+      <div class="popup popup_type_add-card">
         <div class="popup__window">
           <button
             type="button"
@@ -50,11 +53,25 @@
               placeholder="Title"
             />
             <input
-              type="link"
+              type="text"
               class="popup__input popup__input_new_url"
               name="popup__input_image_url"
               placeholder="Image link"
             />
+            <button type="submit" class="button button_type_submit">
+              Create
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="popup popup_type_preview">
+        <div class="popup__window">
+          <button
+            type="button"
+            class="button button_type_close button_type_close_preview"
+          ></button>
+          <img class="popup__preview-image" src="" alt=""/>
             <button type="submit" class="button button_type_submit">
               Create
             </button>
@@ -100,7 +117,7 @@
     <template id="cards-template">
       <li class="cards__card">
         <button type="button" class="button button_type_delete"></button>
-        <img class="cards__image" src=" " alt=" " />
+        <div class="cards__image"></div>
         <div class="cards__content">
           <h2 class="cards__title"></h2>
           <button type="button" class="button button_style_like"></button>
