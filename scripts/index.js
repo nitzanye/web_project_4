@@ -89,6 +89,10 @@ function createCard(card) {
     cardLikeButton.classList.toggle("button_style_full");
   });
 
+  cardDeleteButton.addEventListener("click", () => {
+    newCardElement.remove();
+  });
+
   return newCardElement;
 }
 
