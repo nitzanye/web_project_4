@@ -85,16 +85,18 @@ function createCard(card) {
 }
 
 // Function Render Cards + Add to the DOM//
-function renderCard(card, cardsList) {
-  cardsList.append(newCardElement(card));
+function renderCard(card) {
+  cardsList.append(createCard(card));
 }
 
 // // Function New Card Submit //
 function newCardSubmit(event) {
   event.preventDefault();
-  let newCard = {};
-  newCardTitle = newCardTitleInput.value;
-  newCardUrl = newCardUrlInput.value;
+  let newCard = {
+    title: newCardTitleInput.value,
+    link: newCardUrlInput.value,
+  };
+
   renderCard(createCard(newCard));
 }
 
@@ -113,6 +115,8 @@ addCardButton.addEventListener("click", () => togglePopup(addCardPopup));
 addCloseButton.addEventListener("click", () => togglePopup(addCardPopup));
 
 profilePopup.addEventListener("submit", formSubmitHandler);
+
+addCardPopup.addEventListener("submit", newCardSubmit);
 
 settingsButton.addEventListener("click", () => togglePopup(profilePopup));
 
