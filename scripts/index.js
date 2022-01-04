@@ -2,7 +2,8 @@
 const previewPopup = document.querySelector(".popup_type_preview");
 const addCardPopup = document.querySelector(".popup_type_add-card");
 const profilePopup = document.querySelector(".popup_type_profile");
-const form = document.querySelector(".popup__form");
+const formProfile = document.querySelector(".popup__form_type_profile");
+const formAddCard = document.querySelector(".popup__form_type_add-card");
 const nameInput = document.querySelector(".popup__input_description_name");
 const jobInput = document.querySelector(".popup__input_description_job");
 const previewImageElement = document.querySelector(".popup__preview-image");
@@ -72,6 +73,7 @@ function createCard(card) {
     .querySelector(".cards__card")
     .cloneNode(true);
   newCardElement.querySelector(".cards__title").textContent = card.title;
+
   const imageEl = newCardElement.querySelector(".cards__image");
   imageEl.style.backgroundImage = `url(${card.link})`;
   imageEl.addEventListener("click", function () {
@@ -79,8 +81,14 @@ function createCard(card) {
     togglePopup(previewPopup);
   });
 
-  //handlerlikeicon
-  //handlerDeleteCard
+  //handlerlikeicon +handlerDeleteCard
+  const cardLikeButton = newCardElement.querySelector(".button_style_like");
+  const cardDeleteButton = newCardElement.querySelector(".button_type_delete");
+
+  cardLikeButton.addEventListener("click", () => {
+    cardLikeButton.classList.toggle("button_style_full");
+  });
+
   return newCardElement;
 }
 
@@ -98,13 +106,14 @@ function newCardSubmit(event) {
   };
 
   renderCard(createCard(newCard));
+  togglePopup(addCardPopup);
 }
 
 function formSubmitHandler(event) {
   event.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  togglePopup();
+  togglePopup(profilePopup);
 }
 
 ////////////////
@@ -114,9 +123,9 @@ addCardButton.addEventListener("click", () => togglePopup(addCardPopup));
 
 addCloseButton.addEventListener("click", () => togglePopup(addCardPopup));
 
-profilePopup.addEventListener("submit", formSubmitHandler);
+formProfile.addEventListener("submit", formSubmitHandler);
 
-addCardPopup.addEventListener("submit", newCardSubmit);
+formAddCard.addEventListener("submit", newCardSubmit);
 
 settingsButton.addEventListener("click", () => togglePopup(profilePopup));
 
