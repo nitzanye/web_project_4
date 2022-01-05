@@ -7,6 +7,7 @@ const formAddCard = document.querySelector(".popup__form_type_add-card");
 const nameInput = document.querySelector(".popup__input_description_name");
 const jobInput = document.querySelector(".popup__input_description_job");
 const previewImageElement = document.querySelector(".popup__preview-image");
+const previewImageElementTitle = document.querySelector(".popup__caption");
 
 // Buttons and other DOM elements
 const addCardButton = document.querySelector(".button_type_add");
@@ -72,13 +73,15 @@ function createCard(card) {
   const newCardElement = cardsTemplate.content
     .querySelector(".cards__card")
     .cloneNode(true);
+
   newCardElement.querySelector(".cards__title").textContent = card.title;
 
   const imageEl = newCardElement.querySelector(".cards__image");
   imageEl.style.backgroundImage = `url(${card.link})`;
   imageEl.addEventListener("click", function () {
     previewImageElement.src = card.link;
-    // previewImageElement.textContent = catd.title;
+    previewImageElement.alt = card.title;
+    previewImageElementTitle.textContent = card.title;
     togglePopup(previewPopup);
   });
 
