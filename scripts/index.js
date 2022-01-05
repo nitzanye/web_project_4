@@ -105,12 +105,12 @@ function renderCard(card) {
 // // Function New Card Submit //
 function newCardSubmit(event) {
   event.preventDefault();
-  let newCard = {
+  const newCard = {
     title: newCardTitleInput.value,
     link: newCardUrlInput.value,
   };
 
-  renderCard(createCard(newCard));
+  renderCard(newCard);
   togglePopup(addCardPopup);
 }
 
