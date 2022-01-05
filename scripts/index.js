@@ -11,9 +11,9 @@ const previewImageElementTitle = document.querySelector(".popup__caption");
 
 // Buttons and other DOM elements
 const addCardButton = document.querySelector(".button_type_add");
-const previewCloseButton = document.querySelector(".button_type_close_preview");
-const addCloseButton = document.querySelector(".button_type_close_add");
-const profileCloseButton = document.querySelector(".button_type_close_profile");
+const previewCloseButton = document.querySelector(".button_type_close-preview");
+const addCloseButton = document.querySelector(".button_type_close-add");
+const profileCloseButton = document.querySelector(".button_type_close-profile");
 const settingsButton = document.querySelector(".button_type_edit");
 const profileName = document.querySelector(".profile__name");
 const profileJob = document.querySelector(".profile__job");
