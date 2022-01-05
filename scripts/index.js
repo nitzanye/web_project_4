@@ -123,7 +123,11 @@ function formSubmitHandler(event) {
 ////////////////
 ////  Even handlers
 /////////////////////
-addCardButton.addEventListener("click", () => togglePopup(addCardPopup));
+
+addCardButton.addEventListener("click", () => {
+  formAddCard.reset();
+  togglePopup(addCardPopup);
+});
 
 addCloseButton.addEventListener("click", () => togglePopup(addCardPopup));
 
