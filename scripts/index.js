@@ -78,6 +78,7 @@ function createCard(card) {
   imageEl.style.backgroundImage = `url(${card.link})`;
   imageEl.addEventListener("click", function () {
     previewImageElement.src = card.link;
+    // previewImageElement.textContent = catd.title;
     togglePopup(previewPopup);
   });
 

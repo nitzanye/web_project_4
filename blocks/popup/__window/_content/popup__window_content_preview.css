@@ -1,4 +1,9 @@
 .popup__window_content_preview {
   max-height: 75vh;
   max-width: 75vw;
+  width: auto;
+  height: auto;
+  background: transparent;
+  display: flex;
+  padding: 0;
 }
