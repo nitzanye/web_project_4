@@ -20,7 +20,7 @@ const profileName = document.querySelector(".profile__name");
 const profileJob = document.querySelector(".profile__job");
 
 //Buttons
-const profileSettingsButton = document.querySelector(".button_type_edit");
+const profileEditButton = document.querySelector(".button_type_edit");
 const addCardButton = document.querySelector(".button_type_add");
 const addCardCloseButton = document.querySelector(".button_type_close-add");
 const profileCloseButton = document.querySelector(".button_type_close-profile");
@@ -57,18 +57,17 @@ const initialCards = [
     title: "Lago di Braies",
     link: "https://code.s3.yandex.net/web-code/lago.jpg",
   },
-];
+].reverse();
 
 //////////////////
 //   Functions
 /////////////////
 
-function togglePopup(formWindow) {
-  if (formWindow.classList.contains("popup_opened")) {
-    formWindow.classList.remove("popup_opened");
-  } else {
-    formWindow.classList.add("popup_opened");
-  }
+function openPopup(popType) {
+  popType.classList.add("popup_opened");
+}
+function closePopup(popType) {
+  popType.classList.remove("popup_opened");
 }
 
 // // Function Create Cards //
@@ -86,7 +85,7 @@ function createCard(card) {
     previewImageElement.src = card.link;
     previewImageElement.alt = card.title;
     previewImageElementTitle.textContent = card.title;
-    togglePopup(previewPopup);
+    openPopup(previewPopup);
   });
 
   //handlerlikeicon +handlerDeleteCard
@@ -118,14 +117,20 @@ function handleNewCardSubmit(event) {
   };
 
   renderCard(newCard);
-  togglePopup(addCardPopup);
+  closePopup(addCardPopup);
 }
 
 function handleProfileFormSubmit(event) {
   event.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  togglePopup(profilePopup);
+  closePopup(profilePopup);
+}
+
+function openProfilePopup() {
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
+  openPopup(profilePopup);
 }
 
 ////////////////
@@ -134,23 +139,19 @@ function handleProfileFormSubmit(event) {
 
 addCardButton.addEventListener("click", () => {
   formAddCard.reset();
-  togglePopup(addCardPopup);
+  openPopup(addCardPopup);
 });
 
-addCardCloseButton.addEventListener("click", () => togglePopup(addCardPopup));
+addCardCloseButton.addEventListener("click", () => closePopup(addCardPopup));
 
 formProfile.addEventListener("submit", handleProfileFormSubmit);
 
 formAddCard.addEventListener("submit", handleNewCardSubmit);
 
-profileSettingsButton.addEventListener("click", () => {
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
-  togglePopup(profilePopup);
-});
+profileEditButton.addEventListener("click", openProfilePopup);
 
-previewCloseButton.addEventListener("click", () => togglePopup(previewPopup));
+previewCloseButton.addEventListener("click", () => closePopup(previewPopup));
 
-profileCloseButton.addEventListener("click", () => togglePopup(profilePopup));
+profileCloseButton.addEventListener("click", () => closePopup(profilePopup));
 
 initialCards.forEach(renderCard);
