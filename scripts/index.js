@@ -1,27 +1,33 @@
-// Forms
-const previewPopup = document.querySelector(".popup_type_preview");
-const addCardPopup = document.querySelector(".popup_type_add-card");
+// Popups
 const profilePopup = document.querySelector(".popup_type_profile");
+const addCardPopup = document.querySelector(".popup_type_add-card");
+const previewPopup = document.querySelector(".popup_type_preview");
+
+//Forms
 const formProfile = document.querySelector(".popup__form_type_profile");
 const formAddCard = document.querySelector(".popup__form_type_add-card");
+
+//Forms Elements
 const nameInput = document.querySelector(".popup__input_description_name");
 const jobInput = document.querySelector(".popup__input_description_job");
+const newCardTitleInput = document.querySelector(".popup__input_new_title");
+const newCardUrlInput = document.querySelector(".popup__input_new_url");
 const previewImageElement = document.querySelector(".popup__preview-image");
 const previewImageElementTitle = document.querySelector(".popup__caption");
 
-// Buttons and other DOM elements
-const addCardButton = document.querySelector(".button_type_add");
-const previewCloseButton = document.querySelector(".button_type_close-preview");
-const addCloseButton = document.querySelector(".button_type_close-add");
-const profileCloseButton = document.querySelector(".button_type_close-profile");
-const settingsButton = document.querySelector(".button_type_edit");
+// DOM elements
 const profileName = document.querySelector(".profile__name");
 const profileJob = document.querySelector(".profile__job");
 
-// Add new card Form //
+//Buttons
+const profileSettingsButton = document.querySelector(".button_type_edit");
+const addCardButton = document.querySelector(".button_type_add");
+const addCardCloseButton = document.querySelector(".button_type_close-add");
+const profileCloseButton = document.querySelector(".button_type_close-profile");
+const previewCloseButton = document.querySelector(".button_type_close-preview");
+
+// Cards Template  //
 const cardsTemplate = document.querySelector("#cards-template");
-const newCardTitleInput = document.querySelector(".popup__input_new_title");
-const newCardUrlInput = document.querySelector(".popup__input_new_url");
 
 /// Wrapper ////
 const cardsList = document.querySelector(".cards__list");
@@ -61,8 +67,6 @@ function togglePopup(formWindow) {
   if (formWindow.classList.contains("popup_opened")) {
     formWindow.classList.remove("popup_opened");
   } else {
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileJob.textContent;
     formWindow.classList.add("popup_opened");
   }
 }
@@ -102,11 +106,11 @@ function createCard(card) {
 
 // Function Render Cards + Add to the DOM//
 function renderCard(card) {
-  cardsList.append(createCard(card));
+  cardsList.prepend(createCard(card));
 }
 
 // // Function New Card Submit //
-function newCardSubmit(event) {
+function handleNewCardSubmit(event) {
   event.preventDefault();
   const newCard = {
     title: newCardTitleInput.value,
@@ -117,7 +121,7 @@ function newCardSubmit(event) {
   togglePopup(addCardPopup);
 }
 
-function formSubmitHandler(event) {
+function handleProfileFormSubmit(event) {
   event.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
@@ -133,16 +137,20 @@ addCardButton.addEventListener("click", () => {
   togglePopup(addCardPopup);
 });
 
-addCloseButton.addEventListener("click", () => togglePopup(addCardPopup));
+addCardCloseButton.addEventListener("click", () => togglePopup(addCardPopup));
 
-formProfile.addEventListener("submit", formSubmitHandler);
+formProfile.addEventListener("submit", handleProfileFormSubmit);
 
-formAddCard.addEventListener("submit", newCardSubmit);
+formAddCard.addEventListener("submit", handleNewCardSubmit);
 
-settingsButton.addEventListener("click", () => togglePopup(profilePopup));
+profileSettingsButton.addEventListener("click", () => {
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
+  togglePopup(profilePopup);
+});
 
 previewCloseButton.addEventListener("click", () => togglePopup(previewPopup));
 
 profileCloseButton.addEventListener("click", () => togglePopup(profilePopup));
 
-initialCards.forEach((card) => renderCard(card, cardsList));
+initialCards.forEach(renderCard);
