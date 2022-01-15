@@ -17,17 +17,29 @@
           <h2 class="popup__title">Edit profile</h2>
           <form name="popup__form" class="popup__form popup__form_type_profile">
             <input
+              id="name-input"
               type="text"
               class="popup__input popup__input_description_name"
               name="popup__name"
               placeholder="Your name"
+              required
+              minlength="2"
+              maxlength="40"
             />
+            <span id="name-input-error"></span>
+
             <input
+              id="job-input"
               type="text"
               class="popup__input popup__input_description_job"
               name="popup__job"
               placeholder="Your job"
+              required
+              minlength="2"
+              maxlength="200"
             />
+            <span id="job-input-error"></span>
+
             <button type="submit" class="button button_type_submit">
               Save
             </button>
@@ -47,17 +59,27 @@
             class="popup__form popup__form_type_add-card"
           >
             <input
+              id="card-name-input"
               type="text"
               class="popup__input popup__input_new_title"
               name="popup__input_image_title"
               placeholder="Title"
+              required
+              minlength="1"
+              maxlength="30"
             />
+            <span id="card-name-input-error"></span>
+
             <input
-              type="text"
+              id="card-link-input"
+              type="url"
               class="popup__input popup__input_new_url"
               name="popup__input_image_url"
               placeholder="Image link"
+              required
             />
+            <span id="card-link-input-error"></span>
+
             <button type="submit" class="button button_type_submit">
               Create
             </button>
@@ -122,5 +144,6 @@
       </li>
     </template>
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/validation.js"></script>
   </body>
 </html>
