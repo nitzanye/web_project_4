@@ -139,8 +139,9 @@ function openProfilePopup() {
 /////////////////////
 
 addCardButton.addEventListener("click", () => {
-  checkInitialFormValidity(addCardPopup.querySelector("form"), config);
   formAddCard.reset();
+  checkInitialFormValidity(addCardPopup.querySelector("form"), config);
+
   openPopup(addCardPopup);
 });
 
