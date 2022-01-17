@@ -130,6 +130,7 @@ function handleProfileFormSubmit(event) {
 function openProfilePopup() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
+  checkInitialFormValidity(profilePopup.querySelector("form"), config);
   openPopup(profilePopup);
 }
 
@@ -138,6 +139,7 @@ function openProfilePopup() {
 /////////////////////
 
 addCardButton.addEventListener("click", () => {
+  checkInitialFormValidity(addCardPopup.querySelector("form"), config);
   formAddCard.reset();
   openPopup(addCardPopup);
 });
