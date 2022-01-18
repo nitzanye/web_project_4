@@ -15,7 +15,11 @@
             class="button button_type_close button_type_close-profile"
           ></button>
           <h2 class="popup__title">Edit profile</h2>
-          <form name="popup__form" class="popup__form popup__form_type_profile">
+          <form
+            name="popup__form"
+            class="popup__form popup__form_type_profile"
+            novalidate
+          >
             <input
               id="name-input"
               type="text"
@@ -40,10 +44,7 @@
             />
             <span id="job-input-error" class="popup__error"></span>
 
-            <button
-              type="submit"
-              class="button button_type_submit"
-            >
+            <button type="submit" class="button button_type_submit">
               Save
             </button>
           </form>
@@ -60,6 +61,7 @@
           <form
             name="popup__form__add-card"
             class="popup__form popup__form_type_add-card"
+            novalidate
           >
             <input
               id="card-name-input"
@@ -83,10 +85,7 @@
             />
             <span id="card-link-input-error" class="popup__error"></span>
 
-            <button
-              type="submit"
-              class="button button_type_submit"
-            >
+            <button type="submit" class="button button_type_submit">
               Create
             </button>
           </form>

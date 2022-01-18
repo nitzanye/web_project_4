@@ -1,4 +1,5 @@
 // Popups
+const popups = document.querySelector(".popup");
 const profilePopup = document.querySelector(".popup_type_profile");
 const addCardPopup = document.querySelector(".popup_type_add-card");
 const previewPopup = document.querySelector(".popup_type_preview");
@@ -158,3 +159,13 @@ previewCloseButton.addEventListener("click", () => closePopup(previewPopup));
 profileCloseButton.addEventListener("click", () => closePopup(profilePopup));
 
 initialCards.forEach(renderCard);
+
+//// need to fix it !!!! //////
+
+function keyHandler(event) {
+  if (event.key === "Escape") {
+    closePopup(profilePopup);
+  }
+}
+
+document.addEventListener("keydown", keyHandler);
