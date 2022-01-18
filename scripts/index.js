@@ -1,5 +1,5 @@
 // Popups
-const popups = document.querySelector(".popup");
+const popups = document.querySelectorAll(".popup");
 const profilePopup = document.querySelector(".popup_type_profile");
 const addCardPopup = document.querySelector(".popup_type_add-card");
 const previewPopup = document.querySelector(".popup_type_preview");
@@ -160,12 +160,42 @@ profileCloseButton.addEventListener("click", () => closePopup(profilePopup));
 
 initialCards.forEach(renderCard);
 
-//// need to fix it !!!! //////
+/////////////
 
-function keyHandler(event) {
+function closePopupOverlay(e) {
+  if (e.target == e.currentTarget) {
+    closePopup(e.target);
+  }
+}
+function closePopupEsc(event) {
   if (event.key === "Escape") {
-    closePopup(profilePopup);
+    const openedPopup = document.querySelector(".popup_opened");
+    closePopup(openedPopup);
   }
 }
 
-document.addEventListener("keydown", keyHandler);
+popups.forEach((popup) => {
+  popup.addEventListener("click", (e) => {
+    closePopupOverlay();
+  });
+});
+
+document.addEventListener("keydown", closePopupEsc);
+
+// document.addEventListener("keydown", function () {
+//   popups.addEventListener("click", closePopup);
+// });
+
+// const popupList = document.querySelectorAll(".popup");
+
+// function closePopupEsc(event) {
+//   const key = event.key;
+//   if (key === "Escape") {
+//     window.closePopup();
+//     // closePopup(popups);
+//   }
+// }
+
+// function closePopupOverlay(event) {
+//   popups.forEach((pop) => pop.classList.remove("popup_opened"));
+// }
