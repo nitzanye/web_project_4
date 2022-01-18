@@ -31,14 +31,12 @@ const checkValidity = (formElement, inputElement, settings) => {
   }
 };
 
-// IsInputValid checks the validity of the fields
 const IsInputValid = (inputElements) => {
   return inputElements.every((inputElement) => {
     return inputElement.validity.valid;
   });
 };
 
-// toggleButtonState change the button state based on IsInputValid
 const toggleButtonState = (inputElements, buttonElement, settings) => {
   if (IsInputValid(inputElements)) {
     buttonElement.disabled = false;
@@ -57,8 +55,6 @@ const setEventListeners = (formElement, settings) => {
     settings.submitButtonSelector
   );
 
-  // toggleButtonState(inputElements, buttonElement, settings);
-
   inputElements.forEach((inputElement) => {
     inputElement.addEventListener("input", () => {
       checkValidity(formElement, inputElement, settings);
@@ -69,7 +65,6 @@ const setEventListeners = (formElement, settings) => {
 };
 
 const enableValidation = (settings) => {
-  // find all forms //
   const forms = document.querySelectorAll(settings.formSelector);
 
   forms.forEach((formElement) => {

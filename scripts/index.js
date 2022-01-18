@@ -66,9 +66,11 @@ const initialCards = [
 
 function openPopup(popType) {
   popType.classList.add("popup_opened");
+  document.addEventListener("keydown", closePopupEsc);
 }
 function closePopup(popType) {
   popType.classList.remove("popup_opened");
+  document.removeEventListener("keydown", closePopupEsc);
 }
 
 // // Function Create Cards //
@@ -135,9 +137,26 @@ function openProfilePopup() {
   openPopup(profilePopup);
 }
 
+function closePopupOverlay(e) {
+  if (e.target == e.currentTarget) {
+    closePopup(e.target);
+  }
+}
+function closePopupEsc(event) {
+  if (event.key === "Escape") {
+    const openedPopup = document.querySelector(".popup_opened");
+    closePopup(openedPopup);
+  }
+}
 ////////////////
 ////  Even handlers
 /////////////////////
+
+popups.forEach((popup) => {
+  popup.addEventListener("click", closePopupOverlay);
+});
+
+document.addEventListener("keydown", closePopupEsc);
 
 addCardButton.addEventListener("click", () => {
   formAddCard.reset();
@@ -161,41 +180,3 @@ profileCloseButton.addEventListener("click", () => closePopup(profilePopup));
 initialCards.forEach(renderCard);
 
 /////////////
-
-function closePopupOverlay(e) {
-  if (e.target == e.currentTarget) {
-    closePopup(e.target);
-  }
-}
-function closePopupEsc(event) {
-  if (event.key === "Escape") {
-    const openedPopup = document.querySelector(".popup_opened");
-    closePopup(openedPopup);
-  }
-}
-
-popups.forEach((popup) => {
-  popup.addEventListener("click", (e) => {
-    closePopupOverlay();
-  });
-});
-
-document.addEventListener("keydown", closePopupEsc);
-
-// document.addEventListener("keydown", function () {
-//   popups.addEventListener("click", closePopup);
-// });
-
-// const popupList = document.querySelectorAll(".popup");
-
-// function closePopupEsc(event) {
-//   const key = event.key;
-//   if (key === "Escape") {
-//     window.closePopup();
-//     // closePopup(popups);
-//   }
-// }
-
-// function closePopupOverlay(event) {
-//   popups.forEach((pop) => pop.classList.remove("popup_opened"));
-// }
