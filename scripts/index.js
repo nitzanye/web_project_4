@@ -156,8 +156,6 @@ popups.forEach((popup) => {
   popup.addEventListener("click", closePopupOverlay);
 });
 
-document.addEventListener("keydown", closePopupEsc);
-
 addCardButton.addEventListener("click", () => {
   formAddCard.reset();
   checkInitialFormValidity(addCardPopup.querySelector("form"), config);
