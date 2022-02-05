@@ -1,4 +1,6 @@
-import FormValidator from "./FormValidator.js";
+import { Card } from "./Card.js";
+import { FormValidator } from "./FormValidator.js";
+import * as utils from "./utils.js";
 
 export const settings = {
   inputSelector: ".popup__input",
