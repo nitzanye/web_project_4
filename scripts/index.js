@@ -1,12 +1,28 @@
+import FormValidator from "./FormValidator.js";
+
+export const settings = {
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".button_type_submit",
+  inactiveButtonClass: "button_type_submit-disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible",
+};
+
+// forms
+const editForm = document.querySelector(".popup__form_type_profile");
+const addCardForm = document.querySelector(".popup__form_type_add-card");
+
+const editFormValidator = new FormValidator(settings, editForm);
+const addCardFormValidator = new FormValidator(settings, addCardForm);
+
+editFormValidator.enableValidation();
+addCardFormValidator.enableValidation();
+
 // Popups
 const popups = document.querySelectorAll(".popup");
 const profilePopup = document.querySelector(".popup_type_profile");
 const addCardPopup = document.querySelector(".popup_type_add-card");
 const previewPopup = document.querySelector(".popup_type_preview");
-
-//Forms
-const formProfile = document.querySelector(".popup__form_type_profile");
-const formAddCard = document.querySelector(".popup__form_type_add-card");
 
 //Forms Elements
 const nameInput = document.querySelector(".popup__input_description_name");
@@ -131,9 +147,10 @@ function handleProfileFormSubmit(event) {
 }
 
 function openProfilePopup() {
+  editFormValidator.resetValidation();
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-  checkInitialFormValidity(profilePopup.querySelector("form"), config);
+  // checkInitialFormValidity(profilePopup.querySelector("form"), settings);
   openPopup(profilePopup);
 }
 
@@ -157,17 +174,18 @@ popups.forEach((popup) => {
 });
 
 addCardButton.addEventListener("click", () => {
-  formAddCard.reset();
-  checkInitialFormValidity(addCardPopup.querySelector("form"), config);
+  addCardForm.reset();
+  addCardFormValidator.resetValidation();
+  // checkInitialFormValidity(addCardPopup.querySelector("form"), settings);
 
   openPopup(addCardPopup);
 });
 
 addCardCloseButton.addEventListener("click", () => closePopup(addCardPopup));
 
-formProfile.addEventListener("submit", handleProfileFormSubmit);
+editForm.addEventListener("submit", handleProfileFormSubmit);
 
-formAddCard.addEventListener("submit", handleNewCardSubmit);
+addCardForm.addEventListener("submit", handleNewCardSubmit);
 
 profileEditButton.addEventListener("click", openProfilePopup);
 
