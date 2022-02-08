@@ -3,6 +3,7 @@ import { FormValidator } from "./FormValidator.js";
 import * as utils from "./utils.js";
 
 export const settings = {
+  formSelector: ".popup__form",
   inputSelector: ".popup__input",
   submitButtonSelector: ".button_type_submit",
   inactiveButtonClass: "button_type_submit-disabled",
@@ -94,35 +95,54 @@ function closePopup(popType) {
 // // Function Create Cards //
 
 function createCard(card) {
-  const newCardElement = cardsTemplate.content
-    .querySelector(".cards__card")
-    .cloneNode(true);
-
-  newCardElement.querySelector(".cards__title").textContent = card.title;
-
-  const imageEl = newCardElement.querySelector(".cards__image");
-  imageEl.style.backgroundImage = `url(${card.link})`;
-  imageEl.addEventListener("click", function () {
-    previewImageElement.src = card.link;
-    previewImageElement.alt = card.title;
-    previewImageElementTitle.textContent = card.title;
-    openPopup(previewPopup);
-  });
-
-  //handlerlikeicon +handlerDeleteCard
-  const cardLikeButton = newCardElement.querySelector(".button_style_like");
-  const cardDeleteButton = newCardElement.querySelector(".button_type_delete");
-
-  cardLikeButton.addEventListener("click", () => {
-    cardLikeButton.classList.toggle("button_style_full");
-  });
-
-  cardDeleteButton.addEventListener("click", () => {
-    newCardElement.remove();
-  });
-
-  return newCardElement;
+  const newCardElement = new Card(
+    {
+      title: card.title,
+      link: card.link,
+    },
+    {
+      cardsTemplate: "#cards-template",
+      cardSelector: ".cards__card",
+      imageEl: ".cards__image",
+      cardLikeButton: ".button_style_like",
+      cardLikeActive: "button_style_full",
+      cardDeleteButton: ".cardDeleteButton",
+      previewImageElement: ".previewImageElement",
+      previewImageElementTitle: ".popup__caption",
+      previewPopup: ".popup_type_preview",
+      openPopup: utils.openPopup,
+    }
+  );
+  return newCardElement.createCard();
 }
+// const newCardElement = cardsTemplate.content
+//   .querySelector(".cards__card")
+//   .cloneNode(true);
+
+// newCardElement.querySelector(".cards__title").textContent = card.title;
+
+// const imageEl = newCardElement.querySelector(".cards__image");
+// imageEl.style.backgroundImage = `url(${card.link})`;
+// imageEl.addEventListener("click", function () {
+//   previewImageElement.src = card.link;
+//   previewImageElement.alt = card.title;
+//   previewImageElementTitle.textContent = card.title;
+//   openPopup(previewPopup);
+// });
+
+// //handlerlikeicon +handlerDeleteCard
+// const cardLikeButton = newCardElement.querySelector(".button_style_like");
+// const cardDeleteButton = newCardElement.querySelector(".button_type_delete");
+
+// cardLikeButton.addEventListener("click", () => {
+//   cardLikeButton.classList.toggle("button_style_full");
+// });
+
+// cardDeleteButton.addEventListener("click", () => {
+//   newCardElement.remove();
+// });
+
+// return newCardElement;
 
 // Function Render Cards + Add to the DOM//
 function renderCard(card) {
@@ -180,20 +200,26 @@ addCardButton.addEventListener("click", () => {
   addCardFormValidator.resetValidation();
   // checkInitialFormValidity(addCardPopup.querySelector("form"), settings);
 
-  openPopup(addCardPopup);
+  utils.openPopup(addCardPopup);
 });
 
-addCardCloseButton.addEventListener("click", () => closePopup(addCardPopup));
+addCardCloseButton.addEventListener("click", () =>
+  utils.closePopup(addCardPopup)
+);
 
-editForm.addEventListener("submit", handleProfileFormSubmit);
+editForm.addEventListener("submit", utils.handleProfileFormSubmit);
 
-addCardForm.addEventListener("submit", handleNewCardSubmit);
+addCardForm.addEventListener("submit", utils.handleNewCardSubmit);
 
-profileEditButton.addEventListener("click", openProfilePopup);
+profileEditButton.addEventListener("click", utils.openProfilePopup);
 
-previewCloseButton.addEventListener("click", () => closePopup(previewPopup));
+previewCloseButton.addEventListener("click", () =>
+  utils.closePopup(previewPopup)
+);
 
-profileCloseButton.addEventListener("click", () => closePopup(profilePopup));
+profileCloseButton.addEventListener("click", () =>
+  utils.closePopup(profilePopup)
+);
 
 initialCards.forEach(renderCard);
 

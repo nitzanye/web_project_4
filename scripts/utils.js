@@ -1,10 +1,3 @@
-export const previewPopup = document.querySelector(".popup_type_preview");
-export const previewImageElement = document.querySelector(
-  ".popup__preview-image"
-);
-export const previewImageElementTitle =
-  document.querySelector(".popup__caption");
-
 export const openPopup = (popType) => {
   popType.classList.add("popup_opened");
   document.addEventListener("keydown", closePopupEsc);
@@ -21,3 +14,29 @@ export const closePopup = (popType) => {
   popType.classList.remove("popup_opened");
   document.removeEventListener("keydown", closePopupEsc);
 };
+
+export function openProfilePopup() {
+  editFormValidator.resetValidation();
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
+  // checkInitialFormValidity(profilePopup.querySelector("form"), settings);
+  openPopup(profilePopup);
+}
+
+export function handleProfileFormSubmit(event) {
+  event.preventDefault();
+  profileName.textContent = nameInput.value;
+  profileJob.textContent = jobInput.value;
+  closePopup(profilePopup);
+}
+
+export function handleNewCardSubmit(event) {
+  event.preventDefault();
+  const newCard = {
+    title: newCardTitleInput.value,
+    link: newCardUrlInput.value,
+  };
+
+  renderCard(newCard);
+  closePopup(addCardPopup);
+}

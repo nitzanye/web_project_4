@@ -11,12 +11,9 @@ export class Card {
     this._link = link;
     this._templateCardSelector = templateCardSelector;
 
-    this._cardLikeButton =
-      this._newCardElement.querySelector(".button_style_like");
-    this._cardDeleteButton = this._newCardElement.querySelector(
-      ".button_type_delete"
-    );
-    this._imageEl = this._newCardElement.querySelector(".cards__image");
+    this._cardLikeButton = templateCardSelector.cardLikeButton;
+    this._cardDeleteButton = templateCardSelector.cardDeleteButton;
+    this._imageEl = templateCardSelector.imageEl;
   }
 
   _getCardTemplate() {
