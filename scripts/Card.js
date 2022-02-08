@@ -1,9 +1,9 @@
 import { openPopup } from "./utils.js";
 
 export class Card {
-  constructor({ title, link }, templateCardSelector) {
-    this._title = title;
-    this._link = link;
+  constructor(card, templateCardSelector) {
+    this._title = card.title;
+    this._link = card.link;
     this._templateCardSelector = templateCardSelector;
 
     this._cardLikeButton = templateCardSelector.cardLikeButton;
