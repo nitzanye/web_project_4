@@ -113,7 +113,7 @@ function createCard(card) {
       openPopup: utils.openPopup,
     }
   );
-  return newCardElement.createCard();
+  return newCardElement.createCard(Card.getCardElement());
 }
 // const newCardElement = cardsTemplate.content
 //   .querySelector(".cards__card")
@@ -145,6 +145,7 @@ function createCard(card) {
 // return newCardElement;
 
 // Function Render Cards + Add to the DOM//
+
 function renderCard(card) {
   cardsList.prepend(createCard(card));
 }

@@ -4,10 +4,12 @@ export class Card {
   constructor(card, templateCardSelector) {
     this._title = card.title;
     this._link = card.link;
+
     this._templateCardSelector = templateCardSelector;
+    this._cardSelector = templateCardSelector.cardSelector;
 
     this._cardLikeButton = templateCardSelector.cardLikeButton;
-    this._cardLikeActive = templateCardSelector._cardLikeActive;
+    this._cardLikeActive = templateCardSelector.cardLikeActive;
     this._cardDeleteButton = templateCardSelector.cardDeleteButton;
     this._imageEl = templateCardSelector.imageEl;
 
@@ -17,14 +19,13 @@ export class Card {
     this._previewImageElementTitle = document.querySelector(
       this._previewImageElementTitle
     );
+    this._cardsTemplate = document.querySelector("#cards-template");
   }
 
   _getCardTemplate() {
-    const cardsTemplate = document
-      .querySelector(templateCardSelector)
-      .content.querySelector(".cards__card")
+    return this._cardsTemplate.content
+      .querySelector(this._cardSelector)
       .cloneNode(true);
-    return cardsTemplate;
   }
 
   _handleLikeButton = () =>
@@ -36,7 +37,6 @@ export class Card {
     previewImageElement.src = this._link;
     previewImageElement.alt = this._title;
     previewImageElementTitle.textContent = this._title;
-    openPopup(previewPopup);
   };
 
   _addEventListeners() {
