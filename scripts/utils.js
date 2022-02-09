@@ -1,3 +1,18 @@
+import {
+  renderCard,
+  editFormValidator,
+  addCardFormValidator,
+  addCardPopup,
+  profilePopup,
+} from "./index.js";
+
+const nameInput = document.querySelector(".popup__input_description_name");
+const jobInput = document.querySelector(".popup__input_description_job");
+const newCardTitleInput = document.querySelector(".popup__input_new_title");
+const newCardUrlInput = document.querySelector(".popup__input_new_url");
+const profileName = document.querySelector(".profile__name");
+const profileJob = document.querySelector(".profile__job");
+
 export const openPopup = (popType) => {
   popType.classList.add("popup_opened");
   document.addEventListener("keydown", closePopupEsc);
@@ -21,11 +36,16 @@ export function closePopupOverlay(e) {
   }
 }
 
+export function handleNewCardClick() {
+  addCardFormValidator.resetValidation();
+
+  openPopup(addCardPopup);
+}
+
 export function openProfilePopup() {
   editFormValidator.resetValidation();
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-  // checkInitialFormValidity(profilePopup.querySelector("form"), settings);
   openPopup(profilePopup);
 }
 
@@ -42,6 +62,8 @@ export function handleNewCardSubmit(event) {
     title: newCardTitleInput.value,
     link: newCardUrlInput.value,
   };
+  newCardTitleInput.value = "";
+  newCardUrlInput.value = "";
 
   renderCard(newCard);
   closePopup(addCardPopup);

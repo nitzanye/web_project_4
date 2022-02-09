@@ -23,8 +23,6 @@ export class Card {
     );
     this._cardsTemplate = document.querySelector("#cards-template");
 
-    this._cardLikeActive = document.querySelector(this._cardLikeActiveSelector);
-
     this._previewPopup = document.querySelector(this._previewPopupSelector);
 
     this._openPopup = settings.openPopup;
@@ -36,8 +34,9 @@ export class Card {
       .cloneNode(true);
   }
 
-  _handleLikeButton = () =>
-    this._cardLikeButton.classList.toggle(this._cardLikeActive);
+  _handleLikeButton = () => {
+    this._cardLikeButton.classList.toggle(this._cardLikeActiveSelector);
+  };
 
   _handleDeleteCard = () => this._newCardElement.remove();
 
