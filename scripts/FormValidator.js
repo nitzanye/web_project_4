@@ -8,7 +8,6 @@ export class FormValidator {
     this._errorClass = settings.errorClass;
 
     this._formElement = formElement;
-    this._settings = settings;
   }
 
   _showInputError = (inputElement, errorMessage) => {
@@ -46,26 +45,26 @@ export class FormValidator {
 
     this.inputElements.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
-        this._checkValidity(inputElement, this._settings);
+        this._checkValidity(inputElement);
         this._toggleButtonState();
       });
     });
   };
 
-  _IsInputValid = () =>
+  _checkIfFormValid = () =>
     this.inputElements.every((inputElement) => inputElement.validity.valid);
 
   _toggleButtonState = () => {
     const buttonElement = this._formElement.querySelector(
-      this._settings.submitButtonSelector
+      this._submitButtonSelector
     );
 
-    if (this._IsInputValid()) {
-      buttonElement.disabled = false;
+    if (this._checkIfFormValid()) {
       buttonElement.classList.remove(this._inactiveButtonClass);
+      buttonElement.disabled = false;
     } else {
-      buttonElement.disabled = true;
       buttonElement.classList.add(this._inactiveButtonClass);
+      buttonElement.disabled = true;
     }
   };
 

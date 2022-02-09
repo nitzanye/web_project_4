@@ -3,9 +3,7 @@ export class Card {
     this._title = card.title;
     this._link = card.link;
 
-    this._templateCardSelector = settings;
     this._cardSelector = settings.cardSelector;
-
     this._cardLikeSelector = settings.cardLikeSelector;
     this._cardLikeActiveSelector = settings.cardLikeActiveSelector;
     this._cardDeleteSelector = settings.cardDeleteSelector;
@@ -38,7 +36,7 @@ export class Card {
     this._cardLikeButton.classList.toggle(this._cardLikeActiveSelector);
   };
 
-  _handleDeleteCard = () => this._newCardElement.remove();
+  _handleDeleteCard = () => this._element.remove();
 
   _handlePreviewImage = () => {
     this._previewImageElement.src = this._link;
@@ -48,27 +46,24 @@ export class Card {
   };
 
   _addEventListeners() {
-    this._cardLikeButton = this._newCardElement.querySelector(
-      this._cardLikeSelector
-    );
-    this._cardDeleteButton = this._newCardElement.querySelector(
+    this._cardLikeButton = this._element.querySelector(this._cardLikeSelector);
+    this._cardDeleteButton = this._element.querySelector(
       this._cardDeleteSelector
     );
 
     this._cardLikeButton.addEventListener("click", this._handleLikeButton);
     this._cardDeleteButton.addEventListener("click", this._handleDeleteCard);
-    this._imageEl.addEventListener("click", this._handlePreviewImage);
+    this._imageElement.addEventListener("click", this._handlePreviewImage);
   }
 
   getCardElement = () => {
-    this._newCardElement = this._getCardTemplate();
-    this._imageEl = this._newCardElement.querySelector(this._imageElSelector);
-    this._imageEl.style.backgroundImage = `url(${this._link})`;
-    this._newCardElement.querySelector(".cards__title").textContent =
-      this._title;
+    this._element = this._getCardTemplate();
+    this._imageElement = this._element.querySelector(this._imageElSelector);
+    this._imageElement.style.backgroundImage = `url(${this._link})`;
+    this._element.querySelector(".cards__title").textContent = this._title;
 
     this._addEventListeners();
 
-    return this._newCardElement;
+    return this._element;
   };
 }
