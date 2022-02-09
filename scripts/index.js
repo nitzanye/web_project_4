@@ -113,7 +113,7 @@ function createCard(card) {
       openPopup: utils.openPopup,
     }
   );
-  return newCardElement.createCard(Card.getCardElement());
+  return newCardElement.createCard(Card.getCardElement);
 }
 // const newCardElement = cardsTemplate.content
 //   .querySelector(".cards__card")
@@ -151,43 +151,43 @@ function renderCard(card) {
 }
 
 // // Function New Card Submit //
-function handleNewCardSubmit(event) {
-  event.preventDefault();
-  const newCard = {
-    title: newCardTitleInput.value,
-    link: newCardUrlInput.value,
-  };
+// function handleNewCardSubmit(event) {
+//   event.preventDefault();
+//   const newCard = {
+//     title: newCardTitleInput.value,
+//     link: newCardUrlInput.value,
+//   };
 
-  renderCard(newCard);
-  closePopup(addCardPopup);
-}
+//   renderCard(newCard);
+//   closePopup(addCardPopup);
+// }
 
-function handleProfileFormSubmit(event) {
-  event.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
-  closePopup(profilePopup);
-}
+// function handleProfileFormSubmit(event) {
+//   event.preventDefault();
+//   profileName.textContent = nameInput.value;
+//   profileJob.textContent = jobInput.value;
+//   closePopup(profilePopup);
+// }
 
-function openProfilePopup() {
-  editFormValidator.resetValidation();
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
-  // checkInitialFormValidity(profilePopup.querySelector("form"), settings);
-  openPopup(profilePopup);
-}
+// function openProfilePopup() {
+//   editFormValidator.resetValidation();
+//   nameInput.value = profileName.textContent;
+//   jobInput.value = profileJob.textContent;
+//   // checkInitialFormValidity(profilePopup.querySelector("form"), settings);
+//   openPopup(profilePopup);
+// }
 
 function closePopupOverlay(e) {
   if (e.target == e.currentTarget) {
     closePopup(e.target);
   }
 }
-function closePopupEsc(event) {
-  if (event.key === "Escape") {
-    const openedPopup = document.querySelector(".popup_opened");
-    closePopup(openedPopup);
-  }
-}
+// function closePopupEsc(event) {
+//   if (event.key === "Escape") {
+//     const openedPopup = document.querySelector(".popup_opened");
+//     closePopup(openedPopup);
+//   }
+// }
 ////////////////
 ////  Even handlers
 /////////////////////
