@@ -83,14 +83,14 @@ const initialCards = [
 //   Functions
 /////////////////
 
-function openPopup(popType) {
-  popType.classList.add("popup_opened");
-  document.addEventListener("keydown", closePopupEsc);
-}
-function closePopup(popType) {
-  popType.classList.remove("popup_opened");
-  document.removeEventListener("keydown", closePopupEsc);
-}
+// function openPopup(popType) {
+//   popType.classList.add("popup_opened");
+//   document.addEventListener("keydown", closePopupEsc);
+// }
+// function closePopup(popType) {
+//   popType.classList.remove("popup_opened");
+//   document.removeEventListener("keydown", closePopupEsc);
+// }
 
 // // Function Create Cards //
 
@@ -103,17 +103,17 @@ function createCard(card) {
     {
       cardsTemplate: "#cards-template",
       cardSelector: ".cards__card",
-      imageEl: ".cards__image",
-      cardLikeButton: ".button_style_like",
-      cardLikeActive: "button_style_full",
-      cardDeleteButton: ".cardDeleteButton",
-      previewImageElement: ".previewImageElement",
-      previewImageElementTitle: ".popup__caption",
-      previewPopup: ".popup_type_preview",
+      imageElSelector: ".cards__image",
+      cardLikeSelector: ".button_style_like",
+      cardLikeActiveSelector: ".button_style_full",
+      cardDeleteSelector: ".button_type_delete",
+      previewImageElementSelector: ".popup__preview-image",
+      previewImageElementTitleSelector: ".popup__caption",
+      previewPopupSelector: ".popup_type_preview",
       openPopup: utils.openPopup,
     }
   );
-  return newCardElement.createCard(Card.getCardElement);
+  return newCardElement.getCardElement();
 }
 // const newCardElement = cardsTemplate.content
 //   .querySelector(".cards__card")
@@ -177,11 +177,11 @@ function renderCard(card) {
 //   openPopup(profilePopup);
 // }
 
-function closePopupOverlay(e) {
-  if (e.target == e.currentTarget) {
-    closePopup(e.target);
-  }
-}
+// function closePopupOverlay(e) {
+//   if (e.target == e.currentTarget) {
+//     closePopup(e.target);
+//   }
+// }
 // function closePopupEsc(event) {
 //   if (event.key === "Escape") {
 //     const openedPopup = document.querySelector(".popup_opened");
@@ -193,7 +193,7 @@ function closePopupOverlay(e) {
 /////////////////////
 
 popups.forEach((popup) => {
-  popup.addEventListener("click", closePopupOverlay);
+  popup.addEventListener("click", utils.closePopupOverlay);
 });
 
 addCardButton.addEventListener("click", () => {

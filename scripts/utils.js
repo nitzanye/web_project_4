@@ -15,6 +15,12 @@ export const closePopup = (popType) => {
   document.removeEventListener("keydown", closePopupEsc);
 };
 
+export function closePopupOverlay(e) {
+  if (e.target == e.currentTarget) {
+    closePopup(e.target);
+  }
+}
+
 export function openProfilePopup() {
   editFormValidator.resetValidation();
   nameInput.value = profileName.textContent;
