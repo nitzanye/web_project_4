@@ -42,7 +42,6 @@ export class FormValidator {
     this._inputElements = Array.from(
       this._formElement.querySelectorAll(this._inputSelector)
     );
-    this._toggleButtonState();
     this._inputElements.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._checkValidity(inputElement);
@@ -52,8 +51,9 @@ export class FormValidator {
   };
 
   _checkIfFormValid = () => {
-    debugger;
-    this._inputElements.every((inputElement) => inputElement.validity.valid);
+    return this._inputElements.every(
+      (inputElement) => inputElement.validity.valid
+    );
   };
 
   _toggleButtonState = () => {
