@@ -109,6 +109,7 @@ function handleNewCardClick() {
 
 function handleProfilePopupClick() {
   editFormValidator.resetValidation();
+
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   utils.openPopup(profilePopup);
@@ -139,7 +140,7 @@ function handleNewCardSubmit(event) {
 /////////////////////
 
 popups.forEach((popup) => {
-  popup.addEventListener("click", utils.closePopupOverlay);
+  popup.addEventListener("mousedown", utils.closePopupOverlay);
 });
 
 addCardButton.addEventListener("click", handleNewCardClick);

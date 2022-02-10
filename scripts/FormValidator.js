@@ -55,16 +55,16 @@ export class FormValidator {
     this.inputElements.every((inputElement) => inputElement.validity.valid);
 
   _toggleButtonState = () => {
-    const buttonElement = this._formElement.querySelector(
+    this._buttonElement = this._formElement.querySelector(
       this._submitButtonSelector
     );
 
     if (this._checkIfFormValid()) {
-      buttonElement.classList.remove(this._inactiveButtonClass);
-      buttonElement.disabled = false;
+      this._buttonElement.classList.remove(this._inactiveButtonClass);
+      this._buttonElement.disabled = false;
     } else {
-      buttonElement.classList.add(this._inactiveButtonClass);
-      buttonElement.disabled = true;
+      this._buttonElement.classList.add(this._inactiveButtonClass);
+      this._buttonElement.disabled = true;
     }
   };
 
