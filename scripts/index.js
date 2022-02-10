@@ -108,10 +108,9 @@ function handleNewCardClick() {
 }
 
 function handleProfilePopupClick() {
-  editFormValidator.resetValidation();
-
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
+  editFormValidator.resetValidation();
   utils.openPopup(profilePopup);
 }
 

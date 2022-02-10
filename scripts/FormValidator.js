@@ -39,11 +39,11 @@ export class FormValidator {
   };
 
   _setEventListeners = () => {
-    this.inputElements = Array.from(
+    this._inputElements = Array.from(
       this._formElement.querySelectorAll(this._inputSelector)
     );
-
-    this.inputElements.forEach((inputElement) => {
+    this._toggleButtonState();
+    this._inputElements.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._checkValidity(inputElement);
         this._toggleButtonState();
@@ -51,8 +51,10 @@ export class FormValidator {
     });
   };
 
-  _checkIfFormValid = () =>
-    this.inputElements.every((inputElement) => inputElement.validity.valid);
+  _checkIfFormValid = () => {
+    debugger;
+    this._inputElements.every((inputElement) => inputElement.validity.valid);
+  };
 
   _toggleButtonState = () => {
     this._buttonElement = this._formElement.querySelector(
@@ -69,11 +71,10 @@ export class FormValidator {
   };
 
   resetValidation() {
-    this.inputElements.forEach((inputElement) => {
+    this._toggleButtonState();
+    this._inputElements.forEach((inputElement) => {
       this._hideError(inputElement);
     });
-
-    this._toggleButtonState();
   }
 
   enableValidation() {
