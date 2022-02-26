@@ -1,7 +1,8 @@
 export class Card {
-  constructor(card, settings) {
-    this._title = card.title;
-    this._link = card.link;
+  constructor(data, settings, handleCardClick) {
+    this._title = data.title;
+    this._link = data.link;
+    this._handleCardClick = handleCardClick;
 
     this._cardSelector = settings.cardSelector;
     this._cardLikeSelector = settings.cardLikeSelector;
@@ -23,7 +24,8 @@ export class Card {
 
     this._previewPopup = document.querySelector(this._previewPopupSelector);
 
-    this._openPopup = settings.openPopup;
+    // this._openPopup = settings.openPopup;
+    // this._openPopup = settings.open;
   }
 
   _getCardTemplate() {
@@ -38,12 +40,12 @@ export class Card {
 
   _handleDeleteCard = () => this._element.remove();
 
-  _handlePreviewImage = () => {
-    this._previewImageElement.src = this._link;
-    this._previewImageElement.alt = this._title;
-    this._previewImageElementTitle.textContent = this._title;
-    this._openPopup(this._previewPopup);
-  };
+  // _handlePreviewImage = () => { // i don't need this function anymore
+  //   this._previewImageElement.src = this._link;
+  //   this._previewImageElement.alt = this._title;
+  //   this._previewImageElementTitle.textContent = this._title;
+  //   this._openPopup(this._previewPopup);
+  // };
 
   _addEventListeners() {
     this._cardLikeButton = this._element.querySelector(this._cardLikeSelector);
@@ -53,7 +55,9 @@ export class Card {
 
     this._cardLikeButton.addEventListener("click", this._handleLikeButton);
     this._cardDeleteButton.addEventListener("click", this._handleDeleteCard);
-    this._imageElement.addEventListener("click", this._handlePreviewImage);
+    this._imageElement.addEventListener("click", () => {
+      this._handleCardClick(this._title, this._link)
+    });
   }
 
   getCardElement = () => {
