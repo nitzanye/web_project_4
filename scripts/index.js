@@ -81,19 +81,6 @@ const cardsList = document.querySelector(".cards__list");
 const imagePopup = new PopupWithImage(".popup_type_preview");
 
 
-const section = new Section({ 
-  items: initialCards, 
-  renderer: (data) => {
-    renderCard(data, cardsList);
- const card = generateCard(data)
-  section.addItem(card.getCardElement());
-
- } 
-}, ".cards__card")
-
-section.render();
-
-
 const generateCard = (data) => {
   return new Card(
     {
@@ -117,6 +104,17 @@ const generateCard = (data) => {
   )} 
  
 
+  const section = new Section({ 
+    items: initialCards, 
+    renderer: (data) => {
+      // render(data, cardsList);
+   const card = generateCard(data)
+    section.addItem(card.getCardElement());
+  
+   } 
+  }, ".cards__card")
+  
+  section.render();
 
     //  cardsList.prepend(card.getCardElement());
   // return card.getCardElement();
@@ -127,9 +125,6 @@ const userInfo = new UserInfo({
   profileNameSelector: ".profile__name",
   profileJobSelector: ".profile__job",
 });
-
-
-
 
 
 
@@ -161,8 +156,6 @@ imagePopup.setEventListeners();
 cardsList.render(initialCards);
 editFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
-
-
 
 
 
