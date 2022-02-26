@@ -3,7 +3,7 @@ import { Popup } from "./Popup.js";
 
 export class PopupWithForm extends Popup {
     constructor(popupSelector, handleFormSubmit) {
-        super(popupSelector); //gives me the acsess to this._popupElement
+        super(popupSelector); 
 
         this._popupForm = this._popupElement.querySelector(".popup__form");
         this._handleFormSubmit = handleFormSubmit;
@@ -33,7 +33,6 @@ export class PopupWithForm extends Popup {
     close() {
         this._popupForm.reset();
         super.close();
-        //maybe need to switch the places of the reset and close
     }
 }
 

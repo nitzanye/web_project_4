@@ -9,23 +9,9 @@ export class Card {
     this._cardLikeActiveSelector = settings.cardLikeActiveSelector;
     this._cardDeleteSelector = settings.cardDeleteSelector;
     this._imageElSelector = settings.imageElSelector;
-    this._previewImageElementSelector = settings.previewImageElementSelector;
-    this._previewImageElementTitleSelector =
-      settings.previewImageElementTitleSelector;
-    this._previewPopupSelector = settings.previewPopupSelector;
 
-    this._previewImageElement = document.querySelector(
-      this._previewImageElementSelector
-    );
-    this._previewImageElementTitle = document.querySelector(
-      this._previewImageElementTitleSelector
-    );
-    this._cardsTemplate = document.querySelector("#cards-template");
+    this._cardsTemplate = document.querySelector("#cards-template"); 
 
-    this._previewPopup = document.querySelector(this._previewPopupSelector);
-
-    // this._openPopup = settings.openPopup;
-    // this._openPopup = settings.open;
   }
 
   _getCardTemplate() {
@@ -40,12 +26,6 @@ export class Card {
 
   _handleDeleteCard = () => this._element.remove();
 
-  // _handlePreviewImage = () => { // i don't need this function anymore
-  //   this._previewImageElement.src = this._link;
-  //   this._previewImageElement.alt = this._title;
-  //   this._previewImageElementTitle.textContent = this._title;
-  //   this._openPopup(this._previewPopup);
-  // };
 
   _addEventListeners() {
     this._cardLikeButton = this._element.querySelector(this._cardLikeSelector);

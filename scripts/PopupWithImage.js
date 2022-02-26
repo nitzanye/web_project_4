@@ -18,23 +18,3 @@ export class PopupWithImage extends Popup {
 
 
 
-// export class PopupWithImage extends Popup {
-  
-//     open(title, link) { //{ caption, link , and default setting- undefined}
-//       const imageElement = this._popupElement.querySelector(".popup__preview-image");
-//       const captionElement = this._popupElement.querySelector(".popup__caption");
-
-
-//       imageElement.src = link;
-//       captionElement.textContent = title;
-      
-//       super.open();
-    
-//       // image.alt = title;
-//   }
-// }
-
-
-// move this constance to index.js //
-// const popupImage = new PopupWithImage(".popup__preview-image") //this is the selector
-// popupImage.open("", "");
