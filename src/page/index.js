@@ -89,22 +89,16 @@ api
     console.log(err);
   });
 
+const handleNewCardSubmit = ({ nameInput: name, linkInput: link }) => {
+  api.addNewCard({ name, link }).then((res) => {
+    const card = generateCard(res);
+    cardslist.addNewItem(card.getCardElement());
+  });
+};
 
-  
 const addCardModal = new PopupWithForm(
   ".popup_type_add-card",
-
-  ({ nameInput: name, linkInput: link }) => {
-
-    api.addNewCard(data)
-    .then(res => {
-       generateCard({ name, link });
-
-      cardslist.addItem(res.getCardElement());
-
-    })
-    
-  }
+  handleNewCardSubmit
 );
 
 addCardModal.setEventListeners();
