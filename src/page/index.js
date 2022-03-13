@@ -1,32 +1,57 @@
 import "../page/index.css";
 
-
 import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { UserInfo } from "../components/UserInfo.js";
 import { Section } from "../components/Section.js";
+import Api from "../components/Api.js";
+
 import {
-  initialCards, 
   editForm,
   addCardForm,
   nameInput,
   jobInput,
   profileEditButton,
   addCardButton,
-  settings
-  
-}
- from "../utils/constants.js";
+  settings,
+} from "../utils/constants.js";
+import { data } from "autoprefixer";
 
- 
+//////  Connection with API ////////
+const api = new Api({
+  baseUrl: "https://around.nomoreparties.co/v1/group-12",
+  headers: {
+    authorization: "a68c011d-d292-456c-86c3-53eebc4a76ba",
+    "Content-Type": "application/json",
+  },
+});
+
+////// Add Intial User /////
+
+const userInfo = new UserInfo({
+  profileNameSelector: ".profile__name",
+  profileJobSelector: ".profile__job",
+});
+
+api
+  .getUserInfo()
+  .then((res) => {
+    userInfo.setUserInfo({ name: res.name, job: res.about });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+////// Add Intial Image /////
+
 const imagePopup = new PopupWithImage(".popup_type_preview");
 
 const generateCard = (data) => {
   return new Card(
     {
-      title: data.title,
+      name: data.name,
       link: data.link,
     },
     {
@@ -37,59 +62,65 @@ const generateCard = (data) => {
       cardLikeActiveSelector: "button_style_full",
       cardDeleteSelector: ".button_type_delete",
     },
-    (title, link) => {
-      imagePopup.open(title, link);
+    (name, link) => {
+      imagePopup.open(name, link);
     }
   );
 };
 
+/// Add Initial cards /////
 
-const section = new Section(
+const cardslist = new Section(
   {
-    items: initialCards,
     renderer: (data) => {
       const card = generateCard(data);
-      section.addItem(card.getCardElement());
+      cardslist.addItem(card.getCardElement());
     },
   },
   ".cards__list"
 );
-section.render();
+
+api
+  .getInitialCards()
+  .then((cards) => {
+    cardslist.render(cards);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 
-const userInfo = new UserInfo({
-  profileNameSelector: ".profile__name",
-  profileJobSelector: ".profile__job",
-});
+  
+const addCardModal = new PopupWithForm(
+  ".popup_type_add-card",
 
+  ({ nameInput: name, linkInput: link }) => {
+
+    api.addNewCard(data)
+    .then(res => {
+       generateCard({ name, link });
+
+      cardslist.addItem(res.getCardElement());
+
+    })
+    
+  }
+);
+
+addCardModal.setEventListeners();
 
 const editModal = new PopupWithForm(".popup_type_profile", (data) => {
   userInfo.setUserInfo(data);
 });
 
-
-const addCardModal = new PopupWithForm(
-  ".popup_type_add-card",
-  ({ nameInput: title, linkInput: link }) => {
-    const card = generateCard({ title, link });
-
-    section.addItem(card.getCardElement());
-  }
-);
-
-
 editModal.setEventListeners();
-addCardModal.setEventListeners();
 imagePopup.setEventListeners();
-
 
 const editFormValidator = new FormValidator(settings, editForm);
 const addCardFormValidator = new FormValidator(settings, addCardForm);
 
-
 editFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
-
 
 addCardButton.addEventListener("click", () => {
   addCardFormValidator.resetValidation();
@@ -104,5 +135,3 @@ profileEditButton.addEventListener("click", () => {
   nameInput.value = data.name;
   jobInput.value = data.job;
 });
-
-
