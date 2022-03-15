@@ -37,25 +37,15 @@ const userInfo = new UserInfo({
   profileJobSelector: ".profile__job",
 });
 
-api
-  .getUserInfo()
-  .then((res) => {
-    userInfo.setUserInfo({ name: res.name, job: res.about });
-  })
-  .catch((err) => {
-    console.log(err);
-  });
 
-/// Add Initial cards /////
 
-api
-  .getInitialCards()
-  .then((cards) => {
-    cardslist.render(cards);
+Promise.all([api.getInitialCards(), api.getUserInfo()])
+  .then(([cardData, userData]) => {
+    cardslist.render(cardData);
+
+    userInfo.setUserInfo({ name: userData.name, job: userData.about });
   })
-  .catch((err) => {
-    console.log(err);
-  });
+
 
 const cardslist = new Section(
   {
@@ -74,30 +64,35 @@ const confirmModal = new PopupWithSubmit(".popup_type_delete-card");
 confirmModal.setEventListeners();
 
 function createCard(data) {
-  const card = new Card(
-    {
-      name: data.name,
-      link: data.link,
-      id,
-    },
-    {
-      handleDeleteCard
+  const card = new Card({
+      data,
+      handleCardClick: () => {
+        imagePopup.open(data);
       },
+
+      handleDeleteCard: (id) => {
+        confirmModal.open()
+
+        confirmModal.setAction(() => {
+          api.deleteCard(id)
+            .then(res => {
+              console.log("card is deleted", res)
+              card.removeCard()
+              confirmModal.close()
+            })
+        })
+      }
+    },
     {
       cardsTemplate: "#cards-template",
       cardSelector: ".cards__card",
       imageElSelector: ".cards__image",
       cardLikeSelector: ".button_style_like",
       cardLikeActiveSelector: "button_style_full",
-      cardDeleteSelector: ".button_type_delete",
-    },
-
-    (name, link) => {
-      imagePopup.open(name, link);
+      cardDeleteSelector: ".button_type_delete"
     }
-  );
-
-  return card.getCardElement();
+  ) 
+    return card.getCardElement()
 }
 
 //// Add New Card /////
