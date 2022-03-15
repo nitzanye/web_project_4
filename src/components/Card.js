@@ -1,5 +1,5 @@
 export class Card {
-  constructor({ data, handleDeleteCard, handleCardClick }, settings) {
+  constructor({ data, handleDeleteCard, handleCardClick }, settings, userId) {
     this._name = data.name;
     this._link = data.link;
     this._id = data._id;
@@ -12,6 +12,8 @@ export class Card {
     this._cardLikeActiveSelector = settings.cardLikeActiveSelector;
     this._cardDeleteSelector = settings.cardDeleteSelector;
     this._imageElSelector = settings.imageElSelector;
+
+    this._userId = userId
 
     this._cardsTemplate = document.querySelector("#cards-template");
   }

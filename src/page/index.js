@@ -37,10 +37,11 @@ const userInfo = new UserInfo({
   profileJobSelector: ".profile__job",
 });
 
-
+let userId
 
 Promise.all([api.getInitialCards(), api.getUserInfo()])
   .then(([cardData, userData]) => {
+    userId = userData._id
     cardslist.render(cardData);
 
     userInfo.setUserInfo({ name: userData.name, job: userData.about });
@@ -50,8 +51,7 @@ Promise.all([api.getInitialCards(), api.getUserInfo()])
 const cardslist = new Section(
   {
     renderer: (data) => {
-      const card = createCard(data);
-      cardslist.addItem(card.getCardElement());
+      cardslist.addItem(createCard(data));
     },
   },
   ".cards__list"
@@ -90,7 +90,7 @@ function createCard(data) {
       cardLikeSelector: ".button_style_like",
       cardLikeActiveSelector: "button_style_full",
       cardDeleteSelector: ".button_type_delete"
-    }
+    }, userId
   ) 
     return card.getCardElement()
 }
