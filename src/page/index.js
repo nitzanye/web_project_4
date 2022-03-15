@@ -6,6 +6,7 @@ import { PopupWithImage } from "../components/PopupWithImage.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { UserInfo } from "../components/UserInfo.js";
 import { Section } from "../components/Section.js";
+import PopupWithSubmit from "../components/PopupWithSubmit.js";
 import Api from "../components/Api.js";
 
 import {
@@ -17,6 +18,7 @@ import {
   addCardButton,
   settings,
 } from "../utils/constants.js";
+
 import { data } from "autoprefixer";
 
 //////  Connection with API ////////
@@ -44,41 +46,7 @@ api
     console.log(err);
   });
 
-////// Add Intial Image /////
-
-const imagePopup = new PopupWithImage(".popup_type_preview");
-
-const generateCard = (data) => {
-  return new Card(
-    {
-      name: data.name,
-      link: data.link,
-    },
-    {
-      cardsTemplate: "#cards-template",
-      cardSelector: ".cards__card",
-      imageElSelector: ".cards__image",
-      cardLikeSelector: ".button_style_like",
-      cardLikeActiveSelector: "button_style_full",
-      cardDeleteSelector: ".button_type_delete",
-    },
-    (name, link) => {
-      imagePopup.open(name, link);
-    }
-  );
-};
-
 /// Add Initial cards /////
-
-const cardslist = new Section(
-  {
-    renderer: (data) => {
-      const card = generateCard(data);
-      cardslist.addItem(card.getCardElement());
-    },
-  },
-  ".cards__list"
-);
 
 api
   .getInitialCards()
@@ -89,11 +57,62 @@ api
     console.log(err);
   });
 
+const cardslist = new Section(
+  {
+    renderer: (data) => {
+      const card = createCard(data);
+      cardslist.addItem(card.getCardElement());
+    },
+  },
+  ".cards__list"
+);
+
+////// Add Intial Image /////
+const imagePopup = new PopupWithImage(".popup_type_preview");
+const confirmModal = new PopupWithSubmit(".popup_type_delete-card");
+
+confirmModal.setEventListeners();
+
+function createCard(data) {
+  const card = new Card(
+    {
+      name: data.name,
+      link: data.link,
+      id,
+    },
+    {
+      handleDeleteCard,
+      handleCardClick,
+    },
+    {
+      cardsTemplate: "#cards-template",
+      cardSelector: ".cards__card",
+      imageElSelector: ".cards__image",
+      cardLikeSelector: ".button_style_like",
+      cardLikeActiveSelector: "button_style_full",
+      cardDeleteSelector: ".button_type_delete",
+    },
+
+    (name, link) => {
+      imagePopup.open(name, link);
+    }
+  );
+
+  return card.getCardElement();
+}
+
+//// Add New Card /////
+
 const handleNewCardSubmit = ({ nameInput: name, linkInput: link }) => {
-  api.addNewCard({ name, link }).then((res) => {
-    const card = generateCard(res);
-    cardslist.addNewItem(card.getCardElement());
-  });
+  api
+    .addNewCard({ name, link })
+    .then((res) => {
+      const card = createCard(res);
+      cardslist.addNewItem(card.getCardElement());
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 const addCardModal = new PopupWithForm(

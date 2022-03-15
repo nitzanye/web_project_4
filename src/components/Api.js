@@ -26,5 +26,12 @@ export default class Api {
       body: JSON.stringify(data),
     }).then(this._checkResStatus);
   };
+
+  deleteCard = (cardId) => {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then(this._checkResStatus);
+  };
   // other methods for working with the API
 }
