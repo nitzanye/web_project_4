@@ -81,9 +81,8 @@ function createCard(data) {
       id,
     },
     {
-      handleDeleteCard,
-      handleCardClick,
-    },
+      handleDeleteCard
+      },
     {
       cardsTemplate: "#cards-template",
       cardSelector: ".cards__card",
@@ -108,7 +107,7 @@ const handleNewCardSubmit = ({ nameInput: name, linkInput: link }) => {
     .addNewCard({ name, link })
     .then((res) => {
       const card = createCard(res);
-      cardslist.addNewItem(card.getCardElement());
+      cardslist.addItem(card.getCardElement());
     })
     .catch((err) => {
       console.log(err);

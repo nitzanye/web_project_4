@@ -56,6 +56,7 @@ export class Card {
     this._element.querySelector(".cards__title").textContent = this._name;
 
     this._addEventListeners();
+    console.log(this._element)
 
     return this._element;
   };
