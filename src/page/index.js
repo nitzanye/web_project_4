@@ -37,15 +37,19 @@ const userInfo = new UserInfo({
   profileJobSelector: ".profile__job",
 });
 
-let userId
+let userId;
 
-Promise.all([api.getInitialCards(), api.getUserInfo()])
-  .then(([cardData, userData]) => {
-    userId = userData._id
+Promise.all([api.getInitialCards(), api.getUserInfo()]).then(
+  ([cardData, userData]) => {
+    // console.log("cardData", cardData);
+    userId = userData._id;
     cardslist.render(cardData);
 
     userInfo.setUserInfo({ name: userData.name, job: userData.about });
   })
+  .catch((err) => {
+    console.log(err);
+  });
 
 
 const cardslist = new Section(
@@ -64,24 +68,36 @@ const confirmModal = new PopupWithSubmit(".popup_type_delete-card");
 confirmModal.setEventListeners();
 
 function createCard(data) {
-  const card = new Card({
+  const card = new Card(
+    {
       data,
       handleCardClick: () => {
         imagePopup.open(data);
       },
+      handleLikeButton: (id) => {
+        const isAlreadyLiked = card.isLiked();
+
+        if (isAlreadyLiked) {
+          api.unLikeCard(id).then((res) => {
+            card.likeCard(res.likes)
+          });
+        } else {
+          api.likeCard(id).then((res) => {
+            card.likeCard(res.likes);
+          });
+        }
+      },
 
       handleDeleteCard: (id) => {
-        confirmModal.open()
+        confirmModal.open();
 
         confirmModal.setAction(() => {
-          api.deleteCard(id)
-            .then(res => {
-              console.log("card is deleted", res)
-              card.removeCard()
-              confirmModal.close()
-            })
-        })
-      }
+          api.deleteCard(id).then((res) => {
+            card.removeCard();
+            confirmModal.close();
+          });
+        });
+      },
     },
     {
       cardsTemplate: "#cards-template",
@@ -89,10 +105,11 @@ function createCard(data) {
       imageElSelector: ".cards__image",
       cardLikeSelector: ".button_style_like",
       cardLikeActiveSelector: "button_style_full",
-      cardDeleteSelector: ".button_type_delete"
-    }, userId
-  ) 
-    return card.getCardElement()
+      cardDeleteSelector: ".button_type_delete",
+    },
+    userId
+  );
+  return card.getCardElement();
 }
 
 //// Add New Card /////
@@ -101,8 +118,7 @@ const handleNewCardSubmit = ({ nameInput: name, linkInput: link }) => {
   api
     .addNewCard({ name, link })
     .then((res) => {
-      const card = createCard(res);
-      cardslist.addItem(card.getCardElement());
+      cardslist.addNewItem(createCard(res));
     })
     .catch((err) => {
       console.log(err);
