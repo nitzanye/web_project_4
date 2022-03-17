@@ -7,6 +7,7 @@
 @import url(../blocks/popup/__window/popup__window.css);
 @import url(../blocks/popup/__window/popup__window-content-preview.css);
 @import url(../blocks/popup/__title/popup__title.css);
+@import url(../blocks/popup/__title/_type/popup__title_type_delete-card.css);
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__input/popup__input.css);
 @import url(../blocks/popup/__input/_type/popup__input_type_error.css);
@@ -28,7 +29,9 @@
 
 /* import profile classes */
 @import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__image-container/profile__image-container.css);
 @import url(../blocks/profile/__image/profile__image.css);
+@import url(../blocks/profile/__image-update-icon/profile__image-update-icon.css);
 @import url(../blocks/profile/__info/profile__info.css);
 @import url(../blocks/profile/__wrapper-name/profile__wrapper-name.css);
 @import url(../blocks/profile/__name/profile__name.css);
@@ -40,8 +43,10 @@
 @import url(../blocks/button/_type/button_type_add.css);
 @import url(../blocks/button/_type/button_type_close.css);
 @import url(../blocks/button/_type/button_type_close-preview.css);
+@import url(../blocks/button/_type/button_type_close-delete-card.css);
 @import url(../blocks/button/_type/button_type_submit.css);
 @import url(../blocks/button/_type/button_type_submit-disabled.css);
+@import url(../blocks/button/_type/button_type_submit-delete-card.css);
 @import url(../blocks/button/_type/button_type_delete.css);
 @import url(../blocks/button/_style/button_style_like.css);
 @import url(../blocks/button/_style/button_style_full.css);

@@ -95,14 +95,14 @@
         <div class="popup__window">
           <button
             type="button"
-            class="button button_type_close button_type_close-add"
+            class="button button_type_close button_type_close-add button_type_close-delete-card"
           ></button>
-          <h2 class="popup__title">Are you sure?</h2>
+          <h2 class="popup__title popup__title_type_delete-card">Are you sure?</h2>
           <form
             name="popup__form__add-card"
             class="popup__form popup__form_type_add-card"
             novalidate>
-            <button type="submit" class="button button_type_submit">
+            <button type="submit" class="button button_type_submit buuton_type_submit-delete-card">
               Yes
             </button>
           </form>
@@ -133,11 +133,15 @@
 
       <main class="content">
         <section class="profile">
-          <img
+          <div class="profile__image-container">
+            <img
             class="profile__image"
             src="<%=require('./images/profile__image.png')%>"
             alt="Jacques Cousteau image"
           />
+            <button type="button" class="profile__image-update-icon"></button>  
+          </div>
+          
           <div class="profile__info">
             <div class="profile__wrapper-name">
               <h1 class="profile__name">Jacques Cousteau</h1>

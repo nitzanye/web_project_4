@@ -21,7 +21,14 @@ import {
 
 import { data } from "autoprefixer";
 
+//// Set Loading Data Message for UX ////
+
+const setLoadingMessage = (form, loadingMessage) => {
+  form.querySelector(".button_type_submit").textContent = loadingMessage;
+};
+
 //////  Connection with API ////////
+
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-12",
   headers: {
@@ -30,7 +37,7 @@ const api = new Api({
   },
 });
 
-////// Add Intial User /////
+////// Add Intial Data /////
 
 const userInfo = new UserInfo({
   profileNameSelector: ".profile__name",
@@ -39,8 +46,8 @@ const userInfo = new UserInfo({
 
 let userId;
 
-Promise.all([api.getInitialCards(), api.getUserInfo()]).then(
-  ([cardData, userData]) => {
+Promise.all([api.getInitialCards(), api.getUserInfo()])
+  .then(([cardData, userData]) => {
     // console.log("cardData", cardData);
     userId = userData._id;
     cardslist.render(cardData);
@@ -50,7 +57,6 @@ Promise.all([api.getInitialCards(), api.getUserInfo()]).then(
   .catch((err) => {
     console.log(err);
   });
-
 
 const cardslist = new Section(
   {
@@ -62,10 +68,11 @@ const cardslist = new Section(
 );
 
 ////// Add Intial Image /////
+
 const imagePopup = new PopupWithImage(".popup_type_preview");
 const confirmModal = new PopupWithSubmit(".popup_type_delete-card");
 
-confirmModal.setEventListeners();
+
 
 function createCard(data) {
   const card = new Card(
@@ -79,7 +86,7 @@ function createCard(data) {
 
         if (isAlreadyLiked) {
           api.unLikeCard(id).then((res) => {
-            card.likeCard(res.likes)
+            card.likeCard(res.likes);
           });
         } else {
           api.likeCard(id).then((res) => {
@@ -112,9 +119,10 @@ function createCard(data) {
   return card.getCardElement();
 }
 
-//// Add New Card /////
+//// Handle Form Submit /////
 
 const handleNewCardSubmit = ({ nameInput: name, linkInput: link }) => {
+  setLoadingMessage(addCardForm, "Saving...");
   api
     .addNewCard({ name, link })
     .then((res) => {
@@ -122,22 +130,43 @@ const handleNewCardSubmit = ({ nameInput: name, linkInput: link }) => {
     })
     .catch((err) => {
       console.log(err);
-    });
+    })
+    .finally(() => setLoadingMessage(addCardForm, "Create"));
+    editModal.close();
 };
+
+const handleEditFormSubmit = ({ name, job: about }) => {
+  setLoadingMessage(editForm, "Saving...");
+  api
+    .updateUserInfo({ name, about })
+    .then((res) => {
+      userInfo.setUserInfo(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => setLoadingMessage(editForm, "Save"));
+    addCardModal.close();
+};
+
+
+const editModal = new PopupWithForm(
+  ".popup_type_profile",
+  handleEditFormSubmit
+);
 
 const addCardModal = new PopupWithForm(
   ".popup_type_add-card",
   handleNewCardSubmit
 );
 
+
+
 addCardModal.setEventListeners();
-
-const editModal = new PopupWithForm(".popup_type_profile", (data) => {
-  userInfo.setUserInfo(data);
-});
-
+confirmModal.setEventListeners();
 editModal.setEventListeners();
 imagePopup.setEventListeners();
+
 
 const editFormValidator = new FormValidator(settings, editForm);
 const addCardFormValidator = new FormValidator(settings, addCardForm);
