@@ -7,6 +7,36 @@
   </head>
   <body>
     <div class="page">
+
+      <div class="popup popup_type_avatar">
+        <div class="popup__window">
+          <button
+            type="button"
+            class="button button_type_close button_type_close-avatar"
+          ></button>
+          <h2 class="popup__title popup__title_type_avatar">Change profile picture</h2>
+          <form
+            name="popup__form"
+            class="popup__form popup__form_type_avatar"
+            novalidate
+          >
+            <input
+              id="avatarlink-input"
+              type="url"
+              class="popup__input popup__input_avatarlink"
+              name="avatarlink"
+              placeholder="Image link"
+              required
+            />
+            <span id="avatarlink-input-error" class="popup__error"></span>
+
+            <button type="submit" class="button button_type_submit">
+              Save
+            </button>
+          </form>
+        </div>
+      </div>
+      
       <div class="popup popup_type_profile">
         <div class="popup__window">
           <button

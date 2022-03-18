@@ -12,10 +12,13 @@ import Api from "../components/Api.js";
 import {
   editForm,
   addCardForm,
+  editAvatarForm,
   nameInput,
   jobInput,
+  avatarInput,
   profileEditButton,
   addCardButton,
+  AvatarEditButton,
   settings,
 } from "../utils/constants.js";
 
@@ -42,17 +45,21 @@ const api = new Api({
 const userInfo = new UserInfo({
   profileNameSelector: ".profile__name",
   profileJobSelector: ".profile__job",
+  profileImageSelector: ".profile__image",
 });
 
 let userId;
 
 Promise.all([api.getInitialCards(), api.getUserInfo()])
   .then(([cardData, userData]) => {
-    // console.log("cardData", cardData);
     userId = userData._id;
     cardslist.render(cardData);
 
-    userInfo.setUserInfo({ name: userData.name, job: userData.about });
+    userInfo.setUserInfo({
+      name: userData.name,
+      job: userData.about,
+      avatarlink: userData.avatar,
+    });
   })
   .catch((err) => {
     console.log(err);
@@ -71,8 +78,6 @@ const cardslist = new Section(
 
 const imagePopup = new PopupWithImage(".popup_type_preview");
 const confirmModal = new PopupWithSubmit(".popup_type_delete-card");
-
-
 
 function createCard(data) {
   const card = new Card(
@@ -99,7 +104,7 @@ function createCard(data) {
         confirmModal.open();
 
         confirmModal.setAction(() => {
-          api.deleteCard(id).then((res) => {
+          api.deleteCard(id).then(() => {
             card.removeCard();
             confirmModal.close();
           });
@@ -127,28 +132,50 @@ const handleNewCardSubmit = ({ nameInput: name, linkInput: link }) => {
     .addNewCard({ name, link })
     .then((res) => {
       cardslist.addNewItem(createCard(res));
+      editModal.close();
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => setLoadingMessage(addCardForm, "Create"));
-    editModal.close();
 };
 
 const handleEditFormSubmit = ({ name, job: about }) => {
   setLoadingMessage(editForm, "Saving...");
   api
     .updateUserInfo({ name, about })
-    .then((res) => {
-      userInfo.setUserInfo(res);
+    .then((user) => {
+      userInfo.setUserInfo({ name: user.name, job: user.about, avatarlink: user.avatar });
+      addCardModal.close();
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => setLoadingMessage(editForm, "Save"));
-    addCardModal.close();
 };
 
+const handleEditAvatarSubmit = ({ avatarlink: avatar }) => {
+  setLoadingMessage(editAvatarForm, "Saving...");
+  api
+    .editUserAvatar({avatar})
+    .then((user) => {
+      userInfo.setUserInfo({
+        name: user.name,
+        job: user.about,
+        avatarlink: user.avatar
+      });
+      editAvatarModal.close();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => setLoadingMessage(editAvatarForm, "Save"));
+};
+
+const editAvatarModal = new PopupWithForm(
+  ".popup_type_avatar",
+  handleEditAvatarSubmit
+);
 
 const editModal = new PopupWithForm(
   ".popup_type_profile",
@@ -160,19 +187,27 @@ const addCardModal = new PopupWithForm(
   handleNewCardSubmit
 );
 
-
-
 addCardModal.setEventListeners();
 confirmModal.setEventListeners();
 editModal.setEventListeners();
+editAvatarModal.setEventListeners();
 imagePopup.setEventListeners();
 
-
+const editAvatarValidator = new FormValidator(settings, editAvatarForm);
 const editFormValidator = new FormValidator(settings, editForm);
 const addCardFormValidator = new FormValidator(settings, addCardForm);
 
+editAvatarValidator.enableValidation();
 editFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
+
+AvatarEditButton.addEventListener("click", () => {
+  editAvatarValidator.resetValidation();
+  editAvatarModal.open();
+  const data = userInfo.getUserInfo();
+
+  avatarInput.value = data.avatarlink;
+});
 
 addCardButton.addEventListener("click", () => {
   addCardFormValidator.resetValidation();
@@ -186,4 +221,5 @@ profileEditButton.addEventListener("click", () => {
 
   nameInput.value = data.name;
   jobInput.value = data.job;
+ 
 });

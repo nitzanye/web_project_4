@@ -27,6 +27,14 @@ export default class Api {
       }).then(this._checkResStatus);  
   };
 
+  editUserAvatar = (data) => {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify(data),
+    }).then(this._checkResStatus);  
+};
+
   addNewCard = (data) => {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
@@ -55,8 +63,5 @@ export default class Api {
       headers: this._headers,
     }).then(this._checkResStatus);
   };
-
-
-  // other methods for working with the API
 }
 

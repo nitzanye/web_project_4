@@ -8,6 +8,7 @@
 @import url(../blocks/popup/__window/popup__window-content-preview.css);
 @import url(../blocks/popup/__title/popup__title.css);
 @import url(../blocks/popup/__title/_type/popup__title_type_delete-card.css);
+@import url(../blocks/popup/__title/_type/popup__title_type_avatar.css);
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__input/popup__input.css);
 @import url(../blocks/popup/__input/_type/popup__input_type_error.css);
@@ -44,6 +45,7 @@
 @import url(../blocks/button/_type/button_type_close.css);
 @import url(../blocks/button/_type/button_type_close-preview.css);
 @import url(../blocks/button/_type/button_type_close-delete-card.css);
+@import url(../blocks/button/_type/button_type_close-avatar.css);
 @import url(../blocks/button/_type/button_type_submit.css);
 @import url(../blocks/button/_type/button_type_submit-disabled.css);
 @import url(../blocks/button/_type/button_type_submit-delete-card.css);
