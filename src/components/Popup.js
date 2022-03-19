@@ -9,7 +9,7 @@ export class Popup {
     if (evt.key === "Escape") {
       this.close();
     }
-  };
+  }
 
   setEventListeners() {
     this._popupElement.addEventListener("click", (evt) => {

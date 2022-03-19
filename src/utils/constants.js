@@ -12,7 +12,7 @@ export const avatarInput = document.querySelector(".popup__input_avatarlink");
 //Buttons
 export const profileEditButton = document.querySelector(".button_type_edit");
 export const addCardButton = document.querySelector(".button_type_add");
-export const AvatarEditButton = document.querySelector(".profile__image-update-icon");
+export const avatarEditButton = document.querySelector(".profile__image-update-icon");
 
 
 export const settings = {
@@ -22,5 +22,5 @@ export const settings = {
     inactiveButtonClass: "button_type_submit-disabled",
     inputErrorClass: "popup__input_type_error",
     errorClass: "popup__error_visible",
-  };
+}
 

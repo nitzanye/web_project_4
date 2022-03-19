@@ -18,7 +18,10 @@ export class Card {
     this._userId = userId;
     this._ownerId = data.owner._id;
 
-    this._cardsTemplate = document.querySelector("#cards-template");
+    this._cardsTemplate = settings.cardsTemplate;
+    this._cardsTemplateSelector = settings.cardsTemplateSelector;
+
+    this._cardsTemplate = document.querySelector(this._cardsTemplateSelector);
   }
 
   _getCardTemplate() {
@@ -27,11 +30,9 @@ export class Card {
       .cloneNode(true);
   }
 
-  
 
   isLiked() {
     return this._likes.some((person) => person._id === this._userId)
-
   }
 
   removeCard() {
@@ -40,12 +41,20 @@ export class Card {
     this._element = null;
   }
 
+  _renderLikes = () => {
+    const likesCounter = this._element.querySelector(".cards__like-count");
+    likesCounter.textContent = this._likes.length;
+  
+    if (this.isLiked()) {
+      this._cardLikeButton.classList.add(this._cardLikeActiveSelector);
+    } else {
+      this._cardLikeButton.classList.remove(this._cardLikeActiveSelector);
+    }
+  }
+
   likeCard(newLikes) {
     this._likes = newLikes
-    this._element.querySelector(".cards__like-count").textContent = this._likes.length;
-
-    this._cardLikeButton.classList.toggle(this._cardLikeActiveSelector);
-
+    this._renderLikes();
   }
 
   _addEventListeners() {
@@ -72,18 +81,11 @@ export class Card {
     this._addEventListeners();
 
     if (this._ownerId !== this._userId) {
-      this._cardDeleteButton = this._element.querySelector(
-        this._cardDeleteSelector
-      ).style.display = "none";
+      this._cardDeleteButton.style.display = "none";
     }
 
-    this._element.querySelector(".cards__like-count").textContent = this._likes.length;
-
-    
-    if(this.isLiked()) {
-      this.likeCard(this._likes)
-    }
+    this._renderLikes();
 
     return this._element;
-  };
+  }
 }

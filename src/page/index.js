@@ -7,7 +7,7 @@ import { PopupWithForm } from "../components/PopupWithForm.js";
 import { UserInfo } from "../components/UserInfo.js";
 import { Section } from "../components/Section.js";
 import PopupWithSubmit from "../components/PopupWithSubmit.js";
-import Api from "../components/Api.js";
+import Api from "../utils/Api.js";
 
 import {
   editForm,
@@ -18,17 +18,16 @@ import {
   avatarInput,
   profileEditButton,
   addCardButton,
-  AvatarEditButton,
+  avatarEditButton,
   settings,
 } from "../utils/constants.js";
 
-import { data } from "autoprefixer";
 
 //// Set Loading Data Message for UX ////
 
-const setLoadingMessage = (form, loadingMessage) => {
+const setButtonMessage = (form, loadingMessage) => {
   form.querySelector(".button_type_submit").textContent = loadingMessage;
-};
+}
 
 //////  Connection with API ////////
 
@@ -53,7 +52,7 @@ let userId;
 Promise.all([api.getInitialCards(), api.getUserInfo()])
   .then(([cardData, userData]) => {
     userId = userData._id;
-    cardslist.render(cardData);
+    cardsList.render(cardData);
 
     userInfo.setUserInfo({
       name: userData.name,
@@ -61,14 +60,12 @@ Promise.all([api.getInitialCards(), api.getUserInfo()])
       avatarlink: userData.avatar,
     });
   })
-  .catch((err) => {
-    console.log(err);
-  });
+  .catch(err => console.log(`Error.....: ${err}`))
 
-const cardslist = new Section(
+const cardsList = new Section(
   {
     renderer: (data) => {
-      cardslist.addItem(createCard(data));
+      cardsList.addItem(createCard(data));
     },
   },
   ".cards__list"
@@ -90,13 +87,17 @@ function createCard(data) {
         const isAlreadyLiked = card.isLiked();
 
         if (isAlreadyLiked) {
-          api.unLikeCard(id).then((res) => {
+          api.unLikeCard(id)
+          .then((res) => {
             card.likeCard(res.likes);
-          });
+          })
+          .catch(err => console.log(`Error.....: ${err}`))
         } else {
-          api.likeCard(id).then((res) => {
+          api.likeCard(id)
+          .then((res) => {
             card.likeCard(res.likes);
-          });
+          })
+          .catch(err => console.log(`Error.....: ${err}`))
         }
       },
 
@@ -104,15 +105,17 @@ function createCard(data) {
         confirmModal.open();
 
         confirmModal.setAction(() => {
-          api.deleteCard(id).then(() => {
+          api.deleteCard(id)
+          .then(() => {
             card.removeCard();
             confirmModal.close();
-          });
+          })
+          .catch(err => console.log(`Error.....: ${err}`))
         });
       },
     },
     {
-      cardsTemplate: "#cards-template",
+      cardsTemplateSelector: "#cards-template",
       cardSelector: ".cards__card",
       imageElSelector: ".cards__image",
       cardLikeSelector: ".button_style_like",
@@ -127,35 +130,29 @@ function createCard(data) {
 //// Handle Form Submit /////
 
 const handleNewCardSubmit = ({ nameInput: name, linkInput: link }) => {
-  setLoadingMessage(addCardForm, "Saving...");
-  api
-    .addNewCard({ name, link })
+  setButtonMessage(addCardForm, "Saving...");
+  api.addNewCard({ name, link })
     .then((res) => {
-      cardslist.addNewItem(createCard(res));
-      editModal.close();
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-    .finally(() => setLoadingMessage(addCardForm, "Create"));
-};
-
-const handleEditFormSubmit = ({ name, job: about }) => {
-  setLoadingMessage(editForm, "Saving...");
-  api
-    .updateUserInfo({ name, about })
-    .then((user) => {
-      userInfo.setUserInfo({ name: user.name, job: user.about, avatarlink: user.avatar });
+      cardsList.prependItem(createCard(res));
       addCardModal.close();
     })
-    .catch((err) => {
-      console.log(err);
+    .catch(err => console.log(`Error.....: ${err}`))
+    .finally(() => setButtonMessage(addCardForm, "Create"));
+}
+
+const handleEditFormSubmit = ({ name, job: about }) => {
+  setButtonMessage(editForm, "Saving...");
+  api.updateUserInfo({ name, about })
+    .then((user) => {
+      userInfo.setUserInfo({ name: user.name, job: user.about, avatarlink: user.avatar });
+      editModal.close();
     })
-    .finally(() => setLoadingMessage(editForm, "Save"));
-};
+    .catch(err => console.log(`Error.....: ${err}`))
+    .finally(() => setButtonMessage(editForm, "Save"));
+}
 
 const handleEditAvatarSubmit = ({ avatarlink: avatar }) => {
-  setLoadingMessage(editAvatarForm, "Saving...");
+  setButtonMessage(editAvatarForm, "Saving...");
   api
     .editUserAvatar({avatar})
     .then((user) => {
@@ -166,11 +163,9 @@ const handleEditAvatarSubmit = ({ avatarlink: avatar }) => {
       });
       editAvatarModal.close();
     })
-    .catch((err) => {
-      console.log(err);
-    })
-    .finally(() => setLoadingMessage(editAvatarForm, "Save"));
-};
+    .catch(err => console.log(`Error.....: ${err}`))
+    .finally(() => setButtonMessage(editAvatarForm, "Save"));
+}
 
 const editAvatarModal = new PopupWithForm(
   ".popup_type_avatar",
@@ -201,7 +196,7 @@ editAvatarValidator.enableValidation();
 editFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 
-AvatarEditButton.addEventListener("click", () => {
+avatarEditButton.addEventListener("click", () => {
   editAvatarValidator.resetValidation();
   editAvatarModal.open();
   const data = userInfo.getUserInfo();
